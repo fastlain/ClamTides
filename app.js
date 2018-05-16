@@ -98,13 +98,20 @@ function handleTideStationSelection() {
 
 function loadMap(location) {
     console.log("Map loading...");
-    // create new map
+
+    // create new map centered on USA
     const map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39, lng: -95},
         zoom: 4
     });
 
-
+    const stationLayer = new google.maps.FusionTablesLayer({
+        query: {
+            select: 'Latitude',
+            from: '1RGx0iwnFJd1Gb3nf4uhQ5PGReUIaLEHKTiP0iasi'
+        }
+    });
+    stationLayer.setMap(map);
 }
 
 function handleLocationFormSubmit() {
