@@ -4,7 +4,7 @@
 function processJSONTides(data) {
     $.each(data.predictions, function(index, value){
         if (value.v < 0) {
-            console.log(`Date: ${value.t}   Tide Height (ft.): ${value.v}`);
+            $("#results-tbody").append(`<tr><td>${value.t}</td><td>${value.v}</td></tr>`);
         }
     });
     
@@ -56,6 +56,9 @@ function handleTideStationSelection() {
         const stationId = 9439026;    
         const stationName = "Astoria (Youngs Bay), Oreg."
         console.log(`Selected Station: ${stationName} (${stationId})`);
+
+        // render selected tide station in results section
+        $("#results-heading").text(`Tides for ${stationName} (Station ID:${stationId})`);
 
         // hide map
         console.log("Hiding Map..."); // $(#map).hide();

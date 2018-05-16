@@ -19,6 +19,21 @@
     MODULES
     ===============  */
 
+    /***** Results Table *****/
+    
+    .results-table {
+        border-collapse: collapse;
+    }
+
+    .results-table th, 
+    .results-table td {
+        border: 1px solid black;
+        padding: 3px 5px;
+    }
+
+    .results-table td:nth-of-type(2n) {
+        text-align: right;
+    }
 
 
 /*  ===============

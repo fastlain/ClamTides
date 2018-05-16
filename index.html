@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clam Tides</title>
     <meta description="Find ideal tides for clam digging based on your location, desired dates, and other filters">
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css"/>
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -21,10 +21,24 @@
             <input id="location-input" type="text">
             <button id="location-submit" type="submit">Submit</button>
         </form>
+        <section role="region" id="tide-results">
+            <h3 id="results-heading"></h3>
+            <table id="results-table" class="results-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Tide Height (ft)</th>
+                    </tr>
+                </thead>
+                <tbody id="results-tbody">
+
+                </tbody>
+            </table>
+        </section>
     </main>
     <footer role="contentinfo">
     </footer>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
 </body>
