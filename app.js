@@ -109,7 +109,13 @@ function loadMap(location) {
         query: {
             select: 'Latitude',
             from: '1RGx0iwnFJd1Gb3nf4uhQ5PGReUIaLEHKTiP0iasi'
-        }
+        },
+        styles:[{
+            markerOptions: {
+                iconName: "small_red"
+                // additional options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
+            }
+        }]
     });
     stationLayer.setMap(map);
 }
