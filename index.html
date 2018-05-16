@@ -21,8 +21,21 @@
             <input id="location-input" type="text">
             <button id="location-submit" type="submit">Submit</button>
         </form>
-        <button type="button" id="restart-btn">Start Over</button>
-        <section role="region" id="tide-results" class="tide-results">
+        
+        <button id="restart-btn" type="button">Start Over</button>
+        
+        <section id="date-container" role="region">
+            <h3>Pick a range of dates to search for tides:</h3>
+            <form action="" id="date-form">
+                <label for="date-start">Enter Start Date:</label>
+                <input id="date-start" type="date" name="date-start">
+                <label for="date-end">Enter End Date:</label>
+                <input id="date-end" type="date" name="date-end">
+                <button id="date-submit" type="submit">Get Tides!</button>
+            </form>
+        </section>
+
+        <section id="tide-results" class="tide-results" role="region">
             <h3 id="results-heading"></h3>
             <table id="results-table" class="results-table">
                 <thead>

@@ -16,7 +16,7 @@
 
     /***** Hidden Elements on Load *****/
     
-    #date-filter-container,
+    #date-container,
     #tide-results,
     #restart-btn {
         display: none;

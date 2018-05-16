@@ -48,23 +48,33 @@ function getTides(stationId, beginDate, endDate) {
     $.getJSON("https://tidesandcurrents.noaa.gov/api/datagetter", data, renderTides);
 }
 
+function handleDateSubmit(stationId) {
+            
+    $("#date-submit").click(function(evt){
+        evt.preventDefault();
+
+        // pull date inputs and remove dashes ('-')
+        const beginDate = $("#date-start").val().replace(/-/g,'');
+        const endDate = $("#date-end").val().replace(/-/g,'');
+        console.log(`Begin Date: ${beginDate}  End Date: ${endDate}`);
+        console.log(typeof beginDate);
+        // hide date selection screen
+        $("#date-container").hide();
+        // obtain tide data for specified station and dates
+        getTides(stationId, beginDate, endDate);    
+    });    
+
+}
 
 function loadDateFilters(stationId, stationName) {
     
-    // render date selection screen
-    console.log(`Rendering date filter screen for ${stationName}`);
-    
+    // show date selection screen
+    $("#date-container").show();
+
     // listen for date selection
     console.log("Listening for date selection...");
     
-        // temporary static dates for testing
-        const beginDate = 20180601;
-        const endDate = 20180901;
-        console.log(`Begin Date: ${beginDate}  End Date: ${endDate}`);
-        
-        // hide date selection screen
-        getTides(stationId, beginDate, endDate);
-
+    handleDateSubmit(stationId);
 }
 
 function handleTideStationSelection() {
