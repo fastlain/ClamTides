@@ -6,22 +6,27 @@ function handleStartOverBtn(){
         $("#results-tbody").html("");
         // hide tide-results section
         $("#tide-results").hide();
-        //show location form
+        // show location form
         $("#location-form").show();
+        // hide start over btn
+        $("#restart-btn").hide();
     });
 }
 
 function renderTides(data) {
     // show tide-results section
     $("#tide-results").show();
-
+    
+    // render JSON tide data in table format
     $.each(data.predictions, function(index, value){
         if (value.v < 0) {
             $("#results-tbody").append(`<tr><td>${value.t}</td><td>${value.v}</td></tr>`);
         }
     });
+
     handleStartOverBtn();
-    
+    // show restart-btn
+    $("#restart-btn").show();
 }
 
  // submit AJAX request to NOAA
