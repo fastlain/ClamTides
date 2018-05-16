@@ -96,29 +96,42 @@ function handleTideStationSelection() {
         loadDateFilters(stationId, stationName);
 }
 
-function loadMap(location) {
+function loadMap(lat, long) {
     console.log("Map loading...");
 
     // create new map centered on USA
     const map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 39, lng: -95},
-        zoom: 4,
+        center: {lat: lat, lng: long},
+        zoom: 8,
         fullscreenControl: false
     });
 
-    const stationLayer = new google.maps.FusionTablesLayer({
-        query: {
-            select: 'Latitude',
-            from: '1RGx0iwnFJd1Gb3nf4uhQ5PGReUIaLEHKTiP0iasi'
-        },
-        styles:[{
-            markerOptions: {
-                iconName: "small_red"
-                // additional icon options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
-            }
-        }]
-    });
-    stationLayer.setMap(map);
+        
+    map.data.loadGeoJson("http://localhost:8080/tidestations.json");
+
+
+    map.data.addListener('click', function(event) {
+        document.getElementById('test-box').textContent =
+            event.feature.getProperty('Station ID');
+        console.log(event.feature);
+            
+      });
+      
+    // const stationLayer = new google.maps.FusionTablesLayer({
+    //     query: {
+    //         select: 'Latitude',
+    //         from: '1RGx0iwnFJd1Gb3nf4uhQ5PGReUIaLEHKTiP0iasi'
+    //     },
+    //     styles:[{
+    //         markerOptions: {
+    //             iconName: "small_red"
+    //             // additional icon options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
+    //         }
+    //     }]
+    // });
+    // stationLayer.setMap(map);
+
+    
 }
 
 function handleLocationFormSubmit() {
@@ -131,7 +144,11 @@ function handleLocationFormSubmit() {
         // hide location form
         $("#location-form").hide();
         //load map
-        loadMap(location);
+        navigator.geolocation.getCurrentPosition(function(position){
+            let lat = position.coords.latitude;
+            let long = position.coords.longitude;
+            loadMap(lat, long);
+        });
         // listen for user selection of tide station
         handleTideStationSelection();
     });
