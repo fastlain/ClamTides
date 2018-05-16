@@ -102,7 +102,8 @@ function loadMap(location) {
     // create new map centered on USA
     const map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39, lng: -95},
-        zoom: 4
+        zoom: 4,
+        fullscreenControl: false
     });
 
     const stationLayer = new google.maps.FusionTablesLayer({
@@ -113,7 +114,7 @@ function loadMap(location) {
         styles:[{
             markerOptions: {
                 iconName: "small_red"
-                // additional options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
+                // additional icon options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
             }
         }]
     });
