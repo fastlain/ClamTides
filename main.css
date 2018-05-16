@@ -22,7 +22,9 @@
         display: none;
     }
 
-
+    #map {
+        height: 500px;
+    }
     
 /*  ===============
     MODULES

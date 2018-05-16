@@ -22,7 +22,9 @@
             <button id="location-submit" type="submit">Submit</button>
         </form>
         
-        <button id="restart-btn" type="button">Start Over</button>
+        <div id="map">
+
+        </div>
         
         <section id="date-container" role="region">
             <h3>Pick a range of dates to search for tides:</h3>
@@ -34,6 +36,8 @@
                 <button id="date-submit" type="submit">Get Tides!</button>
             </form>
         </section>
+
+        <button id="restart-btn" type="button">Start Over</button>
 
         <section id="tide-results" class="tide-results" role="region">
             <h3 id="results-heading"></h3>
@@ -54,6 +58,8 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwTolVwNLjiPFIqzkmqH-wZY3Q6W-pRsQ&callback=initMap"
+    async defer></script>
     <script src="app.js"></script>
 </body>
 

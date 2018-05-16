@@ -97,11 +97,14 @@ function handleTideStationSelection() {
 }
 
 function loadMap(location) {
-    // load map
     console.log("Map loading...");
+    // create new map
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 39, lng: -95},
+        zoom: 4
+    });
 
-    // listen for user selection of tide station
-    handleTideStationSelection();
+
 }
 
 function handleLocationFormSubmit() {
@@ -115,6 +118,8 @@ function handleLocationFormSubmit() {
         $("#location-form").hide();
         //load map
         loadMap(location);
+        // listen for user selection of tide station
+        handleTideStationSelection();
     });
 }
 
