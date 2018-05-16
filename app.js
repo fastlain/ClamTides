@@ -106,32 +106,13 @@ function loadMap(lat, long) {
         fullscreenControl: false
     });
 
-        
     map.data.loadGeoJson("http://localhost:8080/tidestations.json");
-
 
     map.data.addListener('click', function(event) {
         document.getElementById('test-box').textContent =
-            event.feature.getProperty('Station ID');
-        console.log(event.feature);
+            event.feature.getProperty('Station ID'); 
             
-      });
-      
-    // const stationLayer = new google.maps.FusionTablesLayer({
-    //     query: {
-    //         select: 'Latitude',
-    //         from: '1RGx0iwnFJd1Gb3nf4uhQ5PGReUIaLEHKTiP0iasi'
-    //     },
-    //     styles:[{
-    //         markerOptions: {
-    //             iconName: "small_red"
-    //             // additional icon options: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3
-    //         }
-    //     }]
-    // });
-    // stationLayer.setMap(map);
-
-    
+      });   
 }
 
 function handleLocationFormSubmit() {
