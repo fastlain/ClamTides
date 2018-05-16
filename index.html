@@ -12,7 +12,7 @@
 
 <body>
     <header role="banner">
-        <h1>Clam Tides</h1>
+        <h1><a href="index.html">Clam Tides</a></h1>
     </header>
     <main role="main">
         <h2>Find the best tides for clam digging near you!</h2>
@@ -21,7 +21,8 @@
             <input id="location-input" type="text">
             <button id="location-submit" type="submit">Submit</button>
         </form>
-        <section role="region" id="tide-results">
+        <button type="button" id="restart-btn">Start Over</button>
+        <section role="region" id="tide-results" class="tide-results">
             <h3 id="results-heading"></h3>
             <table id="results-table" class="results-table">
                 <thead>

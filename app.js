@@ -1,12 +1,26 @@
 "use strict";
 
+function handleStartOverBtn(){
+    $("#restart-btn").click(function(evt){
+        // clear results-tbody
+        $("#results-tbody").html("");
+        // hide tide-results section
+        $("#tide-results").hide();
+        //show location form
+        $("#location-form").show();
+    });
+}
 
-function processJSONTides(data) {
+function renderTides(data) {
+    // show tide-results section
+    $("#tide-results").show();
+
     $.each(data.predictions, function(index, value){
         if (value.v < 0) {
             $("#results-tbody").append(`<tr><td>${value.t}</td><td>${value.v}</td></tr>`);
         }
     });
+    handleStartOverBtn();
     
 }
 
@@ -26,7 +40,7 @@ function getTides(stationId, beginDate, endDate) {
         interval: "hilo"
     }
 
-    $.getJSON("https://tidesandcurrents.noaa.gov/api/datagetter", data, processJSONTides);
+    $.getJSON("https://tidesandcurrents.noaa.gov/api/datagetter", data, renderTides);
 }
 
 
