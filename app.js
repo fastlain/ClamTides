@@ -77,23 +77,18 @@ function loadDateFilters(stationId, stationName) {
     handleDateSubmit(stationId);
 }
 
-function handleTideStationSelection() {
-    // listen for tide station selection
-    console.log("Listening for station selection...");
-    
-        // Temporary static id and name for testing
-        const stationId = 9439026;    
-        const stationName = "Astoria (Youngs Bay), Oreg."
-        console.log(`Selected Station: ${stationName} (${stationId})`);
+function handleTideStationSelection(stationId, stationName) {
+   
+    console.log(`Selected Station: ${stationName} (${stationId})`);
 
-        // render selected tide station in results section
-        $("#results-heading").text(`Tides for ${stationName} (Station ID:${stationId})`);
+    // render selected tide station in results section
+    $("#results-heading").text(`Tides for ${stationName} (Station ID:${stationId})`);
 
-        // hide map
-        console.log("Hiding Map..."); // $(#map).hide();
+    // hide map
+    $("#map").hide();
 
-        // load date filter selection page
-        loadDateFilters(stationId, stationName);
+    // load date filter selection page
+    loadDateFilters(stationId, stationName);
 }
 
 function loadMap(lat, long) {
@@ -106,13 +101,31 @@ function loadMap(lat, long) {
         fullscreenControl: false
     });
 
+    let infoWindow = new google.maps.InfoWindow();
+
     map.data.loadGeoJson("http://localhost:8080/tidestations.json");
 
     map.data.addListener('click', function(event) {
-        document.getElementById('test-box').textContent =
-            event.feature.getProperty('Station ID'); 
-            
-      });   
+        let clickID = event.feature.getProperty('Station ID');         
+        let clickStation = event.feature.getProperty('Station Name'); 
+        let contentString = `
+        <p>${clickStation}</p>
+        <button id="select-station" type="button">Select</button>
+        `;
+        
+        infoWindow.setContent(contentString);
+        // set the position of the infoWindow to the position of the click event
+        infoWindow.setPosition(event.feature.getGeometry().get());
+        // offset the infoWindow from the marker
+        infoWindow.setOptions({pixelOffset: new google.maps.Size(-1,-35)});
+        // open the info winow on the map
+        infoWindow.open(map);
+
+        $("#select-station").click(function(evt) {
+            handleTideStationSelection(clickID, clickStation);   
+        });
+    });
+
 }
 
 function handleLocationFormSubmit() {
@@ -130,8 +143,6 @@ function handleLocationFormSubmit() {
             let long = position.coords.longitude;
             loadMap(lat, long);
         });
-        // listen for user selection of tide station
-        handleTideStationSelection();
     });
 }
 
