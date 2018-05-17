@@ -18,7 +18,7 @@
         <h2>Find the best tides for clam digging near you!</h2>
         <form id="location-form" action="">
             <label for="location-input">Choose location:</label>
-            <input id="location-input" type="text">
+            <input id="location-input" type="text" placeholder="Enter a location">
             <button id="location-submit" type="submit">Submit</button>
         </form>
         
@@ -58,7 +58,7 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwTolVwNLjiPFIqzkmqH-wZY3Q6W-pRsQ&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwTolVwNLjiPFIqzkmqH-wZY3Q6W-pRsQ&libraries=places&callback=initialize"></script>
     <script src="app.js"></script>
 </body>
 

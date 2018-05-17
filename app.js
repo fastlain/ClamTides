@@ -1,7 +1,7 @@
 "use strict";
 
-// create map as a global variable 
-let map;
+// create Google Map API global variables
+var map, autocomplete, places;
 
 function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
@@ -116,6 +116,23 @@ function handleLocationFormSubmit() {
     });
 }
 
+function createAutoComplete() {
+    console.log("trying to AutoComplete");
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('location-input')), {types: ['geocode']});
+    
+    
+    autocomplete.addListener('place_changed', function() {
+        let place = autocomplete.getPlace();
+        if (place.geometry) {
+          map.panTo(place.geometry.location);
+          map.setZoom(10);
+        } else {
+          document.getElementById('location-input').placeholder = 'Enter a city';
+        }
+    });
+}
+
 function getGeoLoc() {
     navigator.geolocation.getCurrentPosition(function(position){
         let lat = position.coords.latitude;
@@ -165,11 +182,12 @@ function createMap() {
 
 }
 
+// initialize the map, geolocation, autocomplete, and handling of user input
+// this function is a callback after load of Google Maps API
 function initialize() {
     console.log("Initializing");
     createMap();
     getGeoLoc();
+    createAutoComplete();
+    handleLocationFormSubmit();
 }
-
-// on document ready, handle location form submission
-$(initialize);
