@@ -2,7 +2,7 @@
 
 function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
-        // clear results-tbody
+        // clear results-tbody 
         $("#results-tbody").html("");
         // hide tide-results section
         $("#tide-results").hide();
@@ -93,6 +93,7 @@ function handleTideStationSelection(stationId, stationName) {
 
 function loadMap(lat, long) {
     console.log("Map loading...");
+    $("#map").show();
 
     // create new map centered on USA
     const map = new google.maps.Map(document.getElementById('map'), {
