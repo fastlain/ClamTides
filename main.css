@@ -15,15 +15,18 @@
     ===============  */
 
     /***** Hidden Elements on Load *****/
-    
     #date-container,
     #tide-results,
     #restart-btn {
         display: none;
     }
 
+
+
     #map {
-        height: 500px;
+        height: 400px;
+        width: 600px;
+        margin: 0 auto;
     }
     
 /*  ===============

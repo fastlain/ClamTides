@@ -1,7 +1,7 @@
 "use strict";
 
 // create Google Map API global variables
-var map, autocomplete, places;
+var map, places, searchBox;
 
 function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
@@ -107,31 +107,57 @@ function setLocation(lat, long) {
 function handleLocationFormSubmit() {
     $("#location-form").submit(function (evt) {
         evt.preventDefault();
-        let location = $("#location-input").val();
-        console.log(`User location input: ${location}`);
+        console.log("handling form submit");        
+        
+        changePlace();
+        
         // clear user input
         $("#location-input").val("");
-
-
     });
+}
+
+function changePlace() {
+    console.log("changing place");
+    
+    places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+        console.log("no places");
+        return;
+    }
+
+    // Change the map bounds to encompass matching returned places
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+        if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+        }
+        if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+        } else {
+        bounds.extend(place.geometry.location);
+        }
+    });
+    map.fitBounds(bounds);
 }
 
 function createAutoComplete() {
-    console.log("trying to AutoComplete");
-    autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('location-input')), {types: ['geocode']});
+    console.log("AutoComplete Created");
     
-    
-    autocomplete.addListener('place_changed', function() {
-        let place = autocomplete.getPlace();
-        if (place.geometry) {
-          map.panTo(place.geometry.location);
-          map.setZoom(10);
-        } else {
-          document.getElementById('location-input').placeholder = 'Enter a city';
-        }
-    });
+    let input = document.getElementById('location-input');
+    searchBox = new google.maps.places.SearchBox(input);
+    //***map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+     // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+      });    
+
+    searchBox.addListener('places_changed', changePlace);
 }
+
 
 function getGeoLoc() {
     navigator.geolocation.getCurrentPosition(function(position){
