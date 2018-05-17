@@ -111,6 +111,16 @@ function handleLocationFormSubmit() {
         console.log(`User location input: ${location}`);
         // clear user input
         $("#location-input").val("");
+
+
+    });
+}
+
+function getGeoLoc() {
+    navigator.geolocation.getCurrentPosition(function(position){
+        let lat = position.coords.latitude;
+        let long = position.coords.longitude;
+        setLocation(lat, long);
     });
 }
 
@@ -120,7 +130,7 @@ function createMap() {
     
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39, lng: -98},
-        zoom: 5,
+        zoom: 4,
         fullscreenControl: false
     });
 
@@ -153,18 +163,12 @@ function createMap() {
         });
     });
 
-    // ask for geolocation
-    navigator.geolocation.getCurrentPosition(function(position){
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
-        setLocation(lat, long);
-    });
-
 }
 
 function initialize() {
     console.log("Initializing");
     createMap();
+    getGeoLoc();
 }
 
 // on document ready, handle location form submission
