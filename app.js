@@ -229,6 +229,11 @@ function createMap() {
         });
     });
 
+    // list for clicks away from info window and close
+    map.addListener('click', function(event){
+        infoWindow.close(map)
+    });
+
 }
 
 // initialize the map, geolocation, autocomplete, and handling of user input
