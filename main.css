@@ -21,7 +21,8 @@ h2 {
     font-size: 1.2rem;
 }
 
-body {
+body,
+input {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -75,6 +76,8 @@ body {
     input {
         border: none;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+        padding: 8px;
+        text-align: center;
     }
 
 
@@ -108,9 +111,17 @@ body {
         margin: 0;
     }
 
+    h3 {
+        margin: 5px 0;
+    }
+
     label {
         display: block;
         margin-left: 0;
+    }
+
+    input {
+        margin: 5px 0;
     }
 
     /***** Hidden Elements on Load *****/
@@ -150,7 +161,7 @@ body {
 
     .location-input {
         width: calc(100% - 100px);
-        padding: 5px;
+
     }
 
     .location-submit {
@@ -170,7 +181,7 @@ body {
     
     .date-submit {
         display: block;
-        margin: 5px auto;
+        margin: 10px auto;
     }
 
     /***** Results Table *****/
@@ -189,6 +200,10 @@ body {
 
     .results-table td:nth-of-type(2n) {
         text-align: right;
+    }
+
+    .restart-btn {
+        margin-top: 20px;
     }
 
 

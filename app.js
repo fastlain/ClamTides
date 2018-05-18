@@ -88,7 +88,7 @@ function handleTideStationSelection(stationId, stationName) {
     console.log(`Selected Station: ${stationName} (${stationId})`);
 
     // render selected tide station in results section
-    $("#results-heading").text(`Tides for ${stationName} (Station ID:${stationId})`);
+    $("#results-heading").text(`Tides for ${stationName}`);
 
     // hide map and location search bar
     $("#map").hide();
@@ -110,8 +110,6 @@ function handleLocationFormSubmit() {
         $("#location-input").focus();
         var locationInput = document.getElementById('location-input');
         google.maps.event.trigger(locationInput, 'keydown', { keyCode: 13 });
-
-        console.log("handling form submit");        
         
         if (searchBox.getPlaces() != undefined)
         {
@@ -194,7 +192,7 @@ function createMap() {
         let clickID = event.feature.getProperty('Station ID');         
         let clickStation = event.feature.getProperty('Station Name'); 
         let contentString = `
-            <p>${clickStation}</p>
+            <p class="info-label">${clickStation}</p>
             <button id="select-station" type="button">Select</button>
             `;
 
