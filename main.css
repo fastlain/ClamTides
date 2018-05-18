@@ -77,9 +77,12 @@ input {
         border: none;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
         padding: 8px;
-        text-align: center;
+        text-align: left;
     }
 
+    input[type="date"] {
+        text-align: center;
+    }
 
 /*  ===============
     PAGE LAYOUT
@@ -122,6 +125,10 @@ input {
 
     input {
         margin: 5px 0;
+    }
+
+    table {
+        margin: 0 auto 15px;
     }
 
     /***** Hidden Elements on Load *****/
@@ -188,7 +195,6 @@ input {
 
     .results-table {
         border-collapse: collapse;
-        margin: 0 auto;
         color: #F7EED7;
     }
 
