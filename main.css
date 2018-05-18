@@ -34,6 +34,7 @@ body {
 
     header {
         background-color: #011E3D;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.4);
     }
     body {
         background-color: #6098AA;
@@ -62,10 +63,18 @@ body {
         background-color: #97B8C2;
         margin: 10px 5px;
         color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 5px 10px;
     }
 
     button:hover {
         background-color: #3D5D73;
+    }
+
+    input {
+        border: none;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     }
 
 
@@ -77,9 +86,12 @@ body {
     body {
         margin: 0;
         padding: 0;
+        height: 100%;
     }
 
-    header,main, form {
+    header,
+    main, 
+    form {
         text-align: center;
     }
 
@@ -87,17 +99,18 @@ body {
         padding: 10px;
     }
 
+    main {
+        height: calc(100% - 150px);
+    }
+
     h1,
     h2 {
         margin: 0;
     }
 
-    form {
-        margin: 15px 0;
-    }
-
     label {
         display: block;
+        margin-left: 0;
     }
 
     /***** Hidden Elements on Load *****/
@@ -108,31 +121,57 @@ body {
     }
 
     #map {
-        height: 350px;
+        height: calc(100% - 100px);
+        min-height: 350px;
         width: 90%;
         max-width: 800px;
         margin: 0 auto;
     }
-    
+
+   
 /*  ===============
     MODULES
     ===============  */
 
     /***** Location Search Form *****/
     
+    .location-form {
+        width: 90%;
+        max-width: 600px;
+        margin: 5px auto;
+        text-align: left;
+    }
+    
     .search-group {
         width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .location-input {
-        width: 60%;
+        width: calc(100% - 100px);
+        padding: 5px;
     }
 
     .location-submit {
-        width: 30%;
         max-width: 100px;
     }
 
+   /***** Map *****/
+   
+   .info-label {
+       font-size: 1rem;
+       margin-top: 20px;
+       margin-bottom: 5px;
+
+   }
+   
+    /***** Date Filter *****/
+    
+    .date-submit {
+        display: block;
+        margin: 5px auto;
+    }
 
     /***** Results Table *****/
 
@@ -152,12 +191,6 @@ body {
         text-align: right;
     }
 
-    /***** Date Filter *****/
-    
-    .date-submit {
-        display: block;
-        margin: 5px auto;
-    }
 
 
 /*  ===============
