@@ -218,6 +218,8 @@ function createMap() {
         infoWindow.setContent(contentString);
         // set the position of the infoWindow to the position of the click event
         infoWindow.setPosition(event.feature.getGeometry().get());
+        // center on info window
+        map.setCenter(event.feature.getGeometry().get());
         // offset the infoWindow from the marker
         infoWindow.setOptions({pixelOffset: new google.maps.Size(-1,-35)});
         // open the info winow on the map
