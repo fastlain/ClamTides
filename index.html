@@ -7,19 +7,22 @@
     <title>Clam Tides</title>
     <meta description="Find ideal tides for clam digging based on your location, desired dates, and other filters">
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700|Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
     <header role="banner">
         <h1><a href="index.html">Clam Tides</a></h1>
+        <h2>Find the best tides for clam digging near you!</h2>
     </header>
     <main role="main">
-        <h2>Find the best tides for clam digging near you!</h2>
         <form id="location-form" action="">
             <label for="location-input">Choose location:</label>
-            <input id="location-input" type="text" placeholder="Enter a location">
-            <button id="location-submit" type="submit">Submit</button>
+            <div class="search-group">
+                <input id="location-input" class="location-input" type="text" placeholder="Enter a location">  
+                <button id="location-submit" class="location-submit" type="submit">Search</button>
+            </div>
         </form>
         
         <div id="map">
@@ -33,7 +36,7 @@
                 <input id="date-start" type="date" name="date-start">
                 <label for="date-end">Enter End Date:</label>
                 <input id="date-end" type="date" name="date-end">
-                <button id="date-submit" type="submit">Get Tides!</button>
+                <button id="date-submit" class="date-submit" type="submit">Get Tides!</button>
             </form>
         </section>
 

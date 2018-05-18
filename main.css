@@ -1,18 +1,104 @@
+/***** Border-box *****/
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 /*  ===============
     BASE STYLES
     ===============  */
 
 /***** Fonts *****/
 
+h1 {
+    font-size: 3rem;
+    font-family: 'Lobster Two', sans-serif;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
 
 /***** Color Palette *****/
+/* #011E3D prussian blue*/
+/* #3D5D73 chambray blue*/
+/* #6098AA air force blue*/
+/* #97B8C2 nepal blue*/
+/* #F7EED7 island spice (creamy yellow)*/
 
+    header {
+        background-color: #011E3D;
+    }
+    body {
+        background-color: #6098AA;
+    }
 
+    h1, 
+    h2,
+    h3,
+    label,
+    a {
+        color: #F7EED7;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    button {
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+        background-color: #97B8C2;
+        margin: 10px 5px;
+        color: white;
+    }
+
+    button:hover {
+        background-color: #3D5D73;
+    }
 
 
 /*  ===============
     PAGE LAYOUT
     ===============  */
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    header,main, form {
+        text-align: center;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    h1,
+    h2 {
+        margin: 0;
+    }
+
+    form {
+        margin: 15px 0;
+    }
+
+    label {
+        display: block;
+    }
 
     /***** Hidden Elements on Load *****/
     #date-container,
@@ -21,11 +107,10 @@
         display: none;
     }
 
-
-
     #map {
-        height: 400px;
-        width: 600px;
+        height: 350px;
+        width: 90%;
+        max-width: 800px;
         margin: 0 auto;
     }
     
@@ -33,20 +118,45 @@
     MODULES
     ===============  */
 
+    /***** Location Search Form *****/
+    
+    .search-group {
+        width: 100%;
+    }
+
+    .location-input {
+        width: 60%;
+    }
+
+    .location-submit {
+        width: 30%;
+        max-width: 100px;
+    }
+
+
     /***** Results Table *****/
 
     .results-table {
         border-collapse: collapse;
+        margin: 0 auto;
+        color: #F7EED7;
     }
 
     .results-table th, 
     .results-table td {
-        border: 1px solid black;
+        border: 1px solid #F7EED7;
         padding: 3px 5px;
     }
 
     .results-table td:nth-of-type(2n) {
         text-align: right;
+    }
+
+    /***** Date Filter *****/
+    
+    .date-submit {
+        display: block;
+        margin: 5px auto;
     }
 
 
