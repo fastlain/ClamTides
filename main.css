@@ -134,7 +134,8 @@ input {
     /***** Hidden Elements on Load *****/
     #date-container,
     #tide-results,
-    #restart-btn {
+    #restart-btn,
+    #geo-btn {
         display: none;
     }
 
@@ -181,7 +182,21 @@ input {
        font-size: 1rem;
        margin-top: 20px;
        margin-bottom: 5px;
+   }
 
+   .geo-btn {
+       background-color: white;
+       cursor: pointer;
+       /* border: none;
+       box-shadow: none; */
+   }
+
+   .geo-btn:hover {
+        background-color: white;
+   }
+
+   .geo-btn svg{
+       color: darkslategrey;
    }
    
     /***** Date Filter *****/

@@ -182,6 +182,24 @@ function createMap() {
         fullscreenControl: false
     });
 
+
+
+    // add geolocation button to map
+    let controlDiv = document.getElementById('geo-btn');
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
+    // delay showing geolocation button a second until map loads
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+      $("#geo-btn").show();
+    });
+    
+    // add event handler to geolocation button
+    $("#geo-btn").click(function(evt) {
+        getGeoLoc();
+    });
+
+
+
+    // load static file with tide station locations and display markers
     map.data.loadGeoJson("tidestations.json");
 
     // create infoWindow to display info when a marker is clicked
