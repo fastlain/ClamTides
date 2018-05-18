@@ -182,7 +182,7 @@ function createMap() {
         fullscreenControl: false
     });
 
-    map.data.loadGeoJson("http://localhost:8080/tidestations.json");
+    map.data.loadGeoJson("tidestations.json");
 
     // create infoWindow to display info when a marker is clicked
     let infoWindow = new google.maps.InfoWindow();    
