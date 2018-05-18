@@ -107,12 +107,19 @@ function setLocation(lat, long) {
 function handleLocationFormSubmit() {
     $("#location-form").submit(function (evt) {
         evt.preventDefault();
+        $("#location-input").focus();
+        var locationInput = document.getElementById('location-input');
+        google.maps.event.trigger(locationInput, 'keydown', { keyCode: 13 });
+
         console.log("handling form submit");        
         
-        changePlace();
+        if (searchBox.getPlaces() != undefined)
+        {
+            changePlace();
         
-        // clear user input
-        $("#location-input").val("");
+            // clear user input
+            $("#location-input").val("");
+        }
     });
 }
 
