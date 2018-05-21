@@ -46,7 +46,8 @@ input {
     h3,
     h4,
     label,
-    a {
+    a,
+    p {
         color: #F7EED7;
     }
 
@@ -85,6 +86,7 @@ input {
         text-align: center;
     }
 
+    
 /*  ===============
     PAGE LAYOUT
     ===============  */
@@ -97,7 +99,8 @@ input {
     }
 
     header,
-    main, 
+    main,
+    footer, 
     form {
         text-align: center;
     }
@@ -118,6 +121,11 @@ input {
     h3,
     h4 {
         margin: 5px 0;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
     }
 
     label {
