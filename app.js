@@ -64,6 +64,8 @@ function handleDateSubmit(stationId) {
         const beginDate = $("#date-start").val().replace(/-/g,'');
         const endDate = $("#date-end").val().replace(/-/g,'');
         console.log(`Begin Date: ${beginDate}  End Date: ${endDate}`);
+        $("#results-subheading").text(`
+        Showing tides less than 0ft between ${beginDate} and ${endDate}`);
         // hide date selection screen
         $("#date-container").hide();
         // obtain tide data for specified station and dates
@@ -88,7 +90,7 @@ function handleTideStationSelection(stationId, stationName) {
     console.log(`Selected Station: ${stationName} (${stationId})`);
 
     // render selected tide station in results section
-    $("#results-heading").text(`Tides for ${stationName}`);
+    $("#results-heading").text(`${stationName}`);
 
     // hide map and location search bar
     $("#map").hide();

@@ -44,6 +44,7 @@ input {
     h1, 
     h2,
     h3,
+    h4,
     label,
     a {
         color: #F7EED7;
@@ -114,7 +115,8 @@ input {
         margin: 0;
     }
 
-    h3 {
+    h3,
+    h4 {
         margin: 5px 0;
     }
 
