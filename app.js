@@ -20,14 +20,21 @@ function handleStartOverBtn(){
 
 function renderTides(data) {
     console.log("Rendering Tides");
+    console.log(data);
         
     // show tide-results section
     $("#tide-results").show();
     
     // render JSON tide data in table format
     $.each(data.predictions, function(index, value){
+        value.date = moment(value.t);
         if (value.v < 0) {
-            $("#results-tbody").append(`<tr><td>${value.t}</td><td>${value.v}</td></tr>`);
+            $("#results-tbody").append(`
+            <tr>
+                <td>${value.date.format("ddd, MMM Do YYYY")}</td>
+                <td>${value.date.format("h:mm a")}</td>
+                <td>${value.v}</td>
+            </tr>`);
         }
     });
 
@@ -61,11 +68,19 @@ function handleDateSubmit(stationId) {
     $("#date-submit").click(function(evt){
         evt.preventDefault();
         // pull date inputs and remove dashes ('-')
-        const beginDate = $("#date-start").val().replace(/-/g,'');
-        const endDate = $("#date-end").val().replace(/-/g,'');
-        console.log(`Begin Date: ${beginDate}  End Date: ${endDate}`);
-        $("#results-subheading").text(`
-        Showing tides less than 0ft between ${beginDate} and ${endDate}`);
+        const beginDateRaw = $("#date-start").val();
+        const endDateRaw = $("#date-end").val();
+        const momentBegin = moment(beginDateRaw);
+        const momentEnd = moment(endDateRaw);
+        const displayBegin = momentBegin.format("MMM Do YYYY");
+        const displayEnd = momentEnd.format("MMM Do YYYY");
+            
+        const beginDate = beginDateRaw.replace(/-/g,'');
+        const endDate = endDateRaw.replace(/-/g,'');
+
+        $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);
+        $("#results-subheading").text(`Showing tides less than 0 ft`);
+        
         // hide date selection screen
         $("#date-container").hide();
         // obtain tide data for specified station and dates

@@ -221,7 +221,11 @@ input {
         padding: 3px 5px;
     }
 
-    .results-table td:nth-of-type(2n) {
+    .results-table td{
+        text-align: left;
+    }
+
+    .results-table td:nth-of-type(3n) {
         text-align: right;
     }
 
