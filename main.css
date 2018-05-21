@@ -141,6 +141,10 @@ input {
         margin: 0 auto 15px;
     }
 
+    footer {
+        margin-top: 10px;
+    }
+
     /***** Hidden Elements on Load *****/
     #date-container,
     #tide-results,
@@ -192,6 +196,7 @@ input {
        font-size: 1rem;
        margin-top: 20px;
        margin-bottom: 5px;
+       color: black;
    }
 
    .geo-btn {
