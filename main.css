@@ -152,7 +152,7 @@ input {
     }
 
     #map {
-        min-height: 350px;
+        min-height: 300px;
         width: 90%;
         max-width: 800px;
         margin: 0 auto;
@@ -192,6 +192,7 @@ input {
    .info-label {
        font-size: 1rem;
        margin-top: 20px;
+       width: 120px;
        margin-bottom: 5px;
        color: black;
    }

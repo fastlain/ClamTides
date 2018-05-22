@@ -252,7 +252,7 @@ function createMap() {
         map.setCenter(event.feature.getGeometry().get());
         // offset the infoWindow from the marker
         infoWindow.setOptions({pixelOffset: new google.maps.Size(-1,-35)});
-        // open the info winow on the map
+        // open the info window on the map
         infoWindow.open(map);
 
         // handle clicks on the info window select button
