@@ -18,23 +18,46 @@ function handleStartOverBtn(){
     });
 }
 
-function renderTides(data) {
-    console.log("Rendering Tides");
-    console.log(data);
-        
+function renderTides(data) {        
     // show tide-results section
     $("#tide-results").show();
     
-    // render JSON tide data in table format
+    // render JSON tide data in cards
     $.each(data.predictions, function(index, value){
         value.date = moment(value.t);
-        if (value.v < 0) {
-            $("#results-tbody").append(`
-            <tr>
-                <td>${value.date.format("ddd, MMM Do YYYY")}</td>
-                <td>${value.date.format("h:mm a")}</td>
-                <td>${value.v}</td>
-            </tr>`);
+        value.v = Number(value.v).toFixed(2);
+
+        let day = value.date.format("ddd");
+        let month = value.date.format("MMM");
+        let date = value.date.format("Do");
+        let time = value.date.format("h:mm");
+        let ampm = value.date.format("a");
+        
+        let cardContent = `
+            <div class="result-card">
+                <div class="date-container">               
+                    <span class="${day}">${day}, </span>
+                    <span class="${month}">${month} </span>
+                    <span class="${date}">${date}</span>
+                </div>
+                <div class="time-container">
+                        <span>${time}</span>
+                        <span class="${ampm}">${ampm}</span>
+                </div>
+                <div class="tide-container">
+                    <span class="tide-height">${value.v}</span>
+                    <span> ft</span>
+                </div>
+            </div>
+        `;
+        $("#results-grid").append(cardContent);
+        console.log("appending");
+        
+    });
+
+    $(".tide-height").each(function(index, elem){              
+        if (Number($(this).text()) > 0) {
+            $(this).parent().parent().hide();
         }
     });
 
@@ -46,8 +69,6 @@ function renderTides(data) {
 
  // submit AJAX request to NOAA
 function getTides(stationId, beginDate, endDate) {
-    console.log("Fetching tides");
-
     const data = {
         station: stationId,
         begin_date: beginDate,
@@ -67,14 +88,15 @@ function handleDateSubmit(stationId) {
             
     $("#date-submit").click(function(evt){
         evt.preventDefault();
-        // pull date inputs and remove dashes ('-')
+        // pull date inputs and 
         const beginDateRaw = $("#date-start").val();
         const endDateRaw = $("#date-end").val();
         const momentBegin = moment(beginDateRaw);
         const momentEnd = moment(endDateRaw);
         const displayBegin = momentBegin.format("MMM Do YYYY");
         const displayEnd = momentEnd.format("MMM Do YYYY");
-            
+        
+        // remove dashes ('-')
         const beginDate = beginDateRaw.replace(/-/g,'');
         const endDate = endDateRaw.replace(/-/g,'');
 
@@ -90,19 +112,15 @@ function handleDateSubmit(stationId) {
 }
 
 function loadDateFilters(stationId, stationName) {
-    
     // show date selection screen
     $("#date-container").show();
 
-    // listen for date selection
-    console.log("Listening for date selection...");
-    
+    // listen for date selection    
     handleDateSubmit(stationId);
 }
 
 function handleTideStationSelection(stationId, stationName) {
-   
-    console.log(`Selected Station: ${stationName} (${stationId})`);
+   //console.log(`Selected Station: ${stationName} (${stationId})`);
 
     // render selected tide station in results section
     $("#results-heading").text(`${stationName}`);
@@ -116,7 +134,7 @@ function handleTideStationSelection(stationId, stationName) {
 }
 
 function setLocation(lat, long) {
-    console.log(`Map repositioning at Lat: ${lat} Lon: ${long}`);
+    //console.log(`Map repositioning at Lat: ${lat} Lon: ${long}`);
     map.setCenter({lat: lat, lng: long});
     map.setZoom(8);
 }
@@ -138,9 +156,7 @@ function handleLocationFormSubmit() {
     });
 }
 
-function changePlace() {
-    console.log("changing place");
-    
+function changePlace() {  
     places = searchBox.getPlaces();
 
     if (places.length == 0) {
@@ -166,8 +182,6 @@ function changePlace() {
 }
 
 function createAutoComplete() {
-    console.log("AutoComplete Created");
-    
     let input = document.getElementById('location-input');
     searchBox = new google.maps.places.SearchBox(input);
     //***map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -180,7 +194,6 @@ function createAutoComplete() {
     searchBox.addListener('places_changed', changePlace);
 }
 
-
 function getGeoLoc() {
     navigator.geolocation.getCurrentPosition(function(position){
         let lat = position.coords.latitude;
@@ -190,9 +203,7 @@ function getGeoLoc() {
 }
 
 function createMap() {
-    // create new map centered on USA
-    console.log("Creating map");
-    
+    // create new map centered on USA  
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39, lng: -98},
         zoom: 4,
@@ -258,7 +269,6 @@ function createMap() {
 // initialize the map, geolocation, autocomplete, and handling of user input
 // this function is a callback after load of Google Maps API
 function initialize() {
-    console.log("Initializing");
     createMap();
     getGeoLoc();
     createAutoComplete();
