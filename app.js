@@ -5,8 +5,6 @@ var map, places, searchBox;
 
 function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
-        // clear results-tbody 
-        $("#results-tbody").html("");
         // hide tide-results section
         $("#tide-results").hide();
         // show location form
