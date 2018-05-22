@@ -144,18 +144,17 @@ function handleLocationFormSubmit() {
         var locationInput = document.getElementById('location-input');
         google.maps.event.trigger(locationInput, 'keydown', { keyCode: 13 });
         
-        if (searchBox.getPlaces() != undefined)
-        {
+        if (searchBox.getPlaces() != undefined) {
             changePlace();
-        
-            // clear user input
-            $("#location-input").val("");
         }
     });
 }
 
 function changePlace() {  
     places = searchBox.getPlaces();
+
+    // clear user input
+    $("#location-input").val("");
 
     if (places.length == 0) {
         console.log("no places");
