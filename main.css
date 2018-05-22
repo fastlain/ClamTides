@@ -135,7 +135,12 @@ input {
     }
 
     footer {
-        margin-top: 10px;
+        position: fixed;
+        bottom: 0;
+        left:0;
+        right:0;
+        padding: 10px;
+        background-color: #011E3D;
     }
 
     /***** Hidden Elements on Load *****/
