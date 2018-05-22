@@ -207,7 +207,9 @@ function createMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39, lng: -98},
         zoom: 4,
-        fullscreenControl: false
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false
     });
 
 
