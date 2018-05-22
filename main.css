@@ -47,8 +47,7 @@ input {
     h4,
     label,
     a,
-    p,
-    span {
+    p {
         color: #F7EED7;
     }
 
@@ -103,6 +102,10 @@ input {
     footer, 
     form {
         text-align: center;
+    }
+
+    main {
+        margin-bottom: 60px;
     }
 
     header {
@@ -251,7 +254,7 @@ input {
         color: #F7EED7;
     }
 
-    .date-container{
+    .date-container {
         width: 40%;
         text-align: left;
     }
