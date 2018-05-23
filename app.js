@@ -19,6 +19,7 @@ function handleStartOverBtn(){
 }
 
 function renderTides(data) {        
+    
     // show tide-results section
     $("#tide-results").show(); 
     
@@ -60,6 +61,9 @@ function renderTides(data) {
         }
     });
 
+    // hide loading section
+    $("#ajax-status").hide();
+
     // listen for user clicks on Start Over button
     handleStartOverBtn();
     // show restart-btn
@@ -80,7 +84,26 @@ function getTides(stationId, beginDate, endDate) {
         interval: "hilo"
     }
 
-    $.getJSON("https://tidesandcurrents.noaa.gov/api/datagetter", data, renderTides);
+    const settings = {
+        url: "https://tidesandcurrents.noaa.gov/api/datagetter",
+        data: data,
+        dataType: "json",
+        beforeSend: function() {
+            $("#ajax-status").show().html('<img src="loader.svg" alt="Page Loading">');
+        },
+        success: renderTides,
+        error: function() {
+            $("#ajax-status").html('<p>Your request was unsuccessful. Please try again.')
+            
+            handleStartOverBtn();
+            // show restart-btn
+            $("#restart-btn").show();
+            
+        }
+    }
+
+
+    $.ajax(settings);
 }
 
 function handleDateSubmit() {

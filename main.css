@@ -225,7 +225,12 @@ input {
         margin: 10px auto;
     }
 
-    /***** Results Table *****/
+    /***** Results *****/
+
+    .ajax-status {
+        display: none;
+        margin: 20px auto;
+    }
 
     .results-grid {
         display: grid;
