@@ -5,21 +5,16 @@ var map, places, searchBox;
 
 function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
-        // hide tide-results section
         $("#tide-results").hide();
         //clear results
         $("#grid-container").html("");
-        // show location form
         $("#location-form").show();
-        // hide start over btn
         $("#restart-btn").hide();
-        // show map
         $("#map").show();
     });
 }
 
 function renderTides(data) {        
-    // show tide-results section
     $("#tide-results").show(); 
     
     // get the first and last years of the results, and the difference
