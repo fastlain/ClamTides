@@ -19,7 +19,6 @@ function handleStartOverBtn(){
 }
 
 function renderTides(data) {        
-    
     // show tide-results section
     $("#tide-results").show(); 
     
@@ -40,6 +39,7 @@ function renderTides(data) {
 
     // render JSON tide data in cards
     $.each(data.predictions, function(index, value){
+       
         // create a moment for each result
         value.date = moment(value.t);
         // round tide data to two decimal places
@@ -87,8 +87,7 @@ function renderTides(data) {
     // hide ajax loading section
     $("#ajax-status").hide();
 
-    // listen for user clicks on Start Over button
-    handleStartOverBtn();
+
     // show restart-btn
     $("#restart-btn").show();
 }
@@ -119,11 +118,8 @@ function getTides(stationId, beginDate, endDate) {
         error: function() {
             // if ajax fails, replace page loader img with error message
             $("#ajax-status").html('<p>Your request was unsuccessful. Please try again.')
-            
-            handleStartOverBtn();
             // show restart-btn
-            $("#restart-btn").show();
-            
+            $("#restart-btn").show();       
         }
     }
 
@@ -131,7 +127,6 @@ function getTides(stationId, beginDate, endDate) {
 }
 
 function handleDateSubmit() {
-    // handle date submit button
     $("#date-submit").click(function(evt){
         evt.preventDefault();
 
@@ -153,8 +148,7 @@ function handleDateSubmit() {
         let displayBegin = start.format("MMM Do YYYY");
         let displayEnd = end.format("MMM Do YYYY");
 
-        $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);
-        $("#results-subheading").text(`Showing tides less than 0 ft`);        
+        $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);     
         
         getTides($("#results-heading").data("stationId"), startDate, endDate);    
     }); 
@@ -166,7 +160,6 @@ function loadDateSelection() {
 
     // if input date picker is blank, create date picker and listen for submit
     if (!$("#date-range").val()) {
-        
         // create date range picker
         $("#date-range").daterangepicker(
             // date range picker options
@@ -186,7 +179,6 @@ function loadDateSelection() {
                 }
             }
         );
-
         handleDateSubmit();
     }
 }
@@ -205,14 +197,12 @@ function handleTideStationSelection(stationId, stationName) {
     loadDateSelection();
 }
 
-function setLocation(lat, long) {
-    map.setCenter({lat: lat, lng: long});
-    map.setZoom(8);
-}
-
+// handle manual entry of location by user (not selection from autocomplete)
 function handleLocationFormSubmit() {
     $("#location-form").submit(function (evt) {
         evt.preventDefault();
+        // focus on location input and trigger enter keystroke to simulate
+        // change in the Places autocomplete box
         $("#location-input").focus();
         var locationInput = document.getElementById('location-input');
         google.maps.event.trigger(locationInput, 'keydown', { keyCode: 13 });
@@ -223,52 +213,58 @@ function handleLocationFormSubmit() {
     });
 }
 
+// handle user selection of places from autocomplete box
 function changePlace() {  
+    // get selected Places
     places = searchBox.getPlaces();
 
     // clear user input
     $("#location-input").val("");
 
+    // if no Places found, leave function and wait for new selection
     if (places.length == 0) {
-        console.log("no places");
         return;
     }
 
     // Change the map bounds to encompass matching returned places
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
+        // if user entry or selection doesn't have latlong coordinates, exit
         if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
+            return;
         }
         if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
+             bounds.union(place.geometry.viewport);
         } else {
-        bounds.extend(place.geometry.location);
+            bounds.extend(place.geometry.location);
         }
     });
+    // reposition map around Places
     map.fitBounds(bounds);
 }
 
+// use the Google Maps Places library to generate an autocomplete search box
 function createAutoComplete() {
+    // associate the search box with #location-input
     let input = document.getElementById('location-input');
     searchBox = new google.maps.places.SearchBox(input);
-    //***map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
      // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
-      });    
+    });    
 
+    // when user selects a generated place, reposition the map
     searchBox.addListener('places_changed', changePlace);
 }
 
+// get geolocation, if available, and recenter map to that location
 function getGeoLoc() {
     navigator.geolocation.getCurrentPosition(function(position){
         let lat = position.coords.latitude;
         let long = position.coords.longitude;
-        setLocation(lat, long);
+        map.setCenter({lat: lat, lng: long});
+        map.setZoom(8);
     });
 }
 
@@ -282,12 +278,11 @@ function createMap() {
         streetViewControl: false
     });
 
-
-
     // add geolocation button to map
     let controlDiv = document.getElementById('geo-btn');
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
-    // delay showing geolocation button a second until map loads
+    
+    // delay showing geolocation button until map loads
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
       $("#geo-btn").show();
     });
@@ -297,15 +292,12 @@ function createMap() {
         getGeoLoc();
     });
 
-
-
     // load static file with tide station locations and display markers
     map.data.loadGeoJson("tidestations.json");
-
-    // create infoWindow to display info when a marker is clicked
+    // create pop-up to display info when a marker is clicked
     let infoWindow = new google.maps.InfoWindow();    
 
-    // listen for map clicks and display info window on marker click
+    // listen for map clicks and get information marker click
     map.data.addListener('click', function(event) {
         let clickID = event.feature.getProperty('Station ID');         
         let clickStation = event.feature.getProperty('Station Name'); 
@@ -314,7 +306,7 @@ function createMap() {
             <button id="select-station" type="button">Select</button>
             `;
 
-        // add description and select button to infoWindow 
+        // add marker description and a selection button to infoWindow 
         infoWindow.setContent(contentString);
         // set the position of the infoWindow to the position of the click event
         infoWindow.setPosition(event.feature.getGeometry().get());
@@ -324,7 +316,6 @@ function createMap() {
         infoWindow.setOptions({pixelOffset: new google.maps.Size(-1,-35)});
         // open the info window on the map
         infoWindow.open(map);
-
         // handle clicks on the info window select button
         $("#select-station").click(function(evt) {
             handleTideStationSelection(clickID, clickStation);   
@@ -339,10 +330,13 @@ function createMap() {
 }
 
 // initialize the map, geolocation, autocomplete, and handling of user input
-// this function is a callback after load of Google Maps API
 function initialize() {
     createMap();
     getGeoLoc();
     createAutoComplete();
     handleLocationFormSubmit();
+    handleStartOverBtn();
 }
+
+// on document ready, run initialize function
+$(initialize);
