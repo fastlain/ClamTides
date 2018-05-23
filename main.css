@@ -202,17 +202,17 @@ input {
    .geo-btn {
        background-color: white;
        cursor: pointer;
-       /* border: none;
-       box-shadow: none; */
+       margin-right: 8px;
    }
 
    .geo-btn:hover {
         background-color: white;
    }
 
-   .geo-btn svg{
-       color: darkslategrey;
-   }
+   .geo-btn img{
+        margin: auto;
+        margin-top: 4px;
+    }
    
     /***** Date Filter *****/
     
