@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clam Tides</title>
     <meta description="Find ideal tides for clam digging based on your location, desired dates, and other filters">
+    <!-- Normalize.css -->
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700|Roboto:400,700" rel="stylesheet">
+    <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    <!-- Date Range Picker Styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -32,10 +37,8 @@
         <section id="date-container" role="region">
             <h3>Pick a range of dates to search for tides:</h3>
             <form action="" id="date-form" class="date-form">
-                <label for="date-start">Enter Start Date:</label>
-                <input id="date-start" type="date" name="date-start">
-                <label for="date-end">Enter End Date:</label>
-                <input id="date-end" type="date" name="date-end">
+                <label for="date-range">Choose dates:</label>
+                <input id="date-range" class="date-range" type="text" name="date-range">
                 <button id="date-submit" class="date-submit" type="submit">Get Tides!</button>
             </form>
         </section>
@@ -54,9 +57,15 @@
         <p>Last updated: 5/21/18</p>
     </footer>
 
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Google Maps and Places API -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwTolVwNLjiPFIqzkmqH-wZY3Q6W-pRsQ&libraries=places&callback=initialize"></script>
+    <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
+    <!-- Date Range Picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    
     <script src="app.js"></script>
 </body>
 

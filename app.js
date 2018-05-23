@@ -7,6 +7,8 @@ function handleStartOverBtn(){
     $("#restart-btn").click(function(evt){
         // hide tide-results section
         $("#tide-results").hide();
+        //clear results
+        $("#results-grid").html("");
         // show location form
         $("#location-form").show();
         // hide start over btn
@@ -83,38 +85,62 @@ function getTides(stationId, beginDate, endDate) {
 }
 
 function handleDateSubmit(stationId) {
-            
+    // handle date submit button
     $("#date-submit").click(function(evt){
         evt.preventDefault();
-        // pull date inputs and 
-        const beginDateRaw = $("#date-start").val();
-        const endDateRaw = $("#date-end").val();
-        const momentBegin = moment(beginDateRaw);
-        const momentEnd = moment(endDateRaw);
-        const displayBegin = momentBegin.format("MMM Do YYYY");
-        const displayEnd = momentEnd.format("MMM Do YYYY");
+
+        // hide date selection screen
+        $("#date-container").hide();
+
+        // get date range from input field
+        let dateRange = $("#date-range").val().split(" - ");   
+
+        // convert input dates to moments
+        let start = moment(dateRange[0], "MM-DD-YYYY");
+        let end = moment(dateRange[1], "MM-DD-YYYY");
         
-        // remove dashes ('-')
-        const beginDate = beginDateRaw.replace(/-/g,'');
-        const endDate = endDateRaw.replace(/-/g,'');
+        //format dates for AJAX request
+        let startDate = start.format("YYYYMMDD");
+        let endDate = end.format("YYYYMMDD");
+        
+        //format dates for display
+        let displayBegin = start.format("MMM Do YYYY");
+        let displayEnd = end.format("MMM Do YYYY");
 
         $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);
         $("#results-subheading").text(`Showing tides less than 0 ft`);
+        console.log(`Start: ${startDate}, End: ${endDate}`);
         
-        // hide date selection screen
-        $("#date-container").hide();
-        // obtain tide data for specified station and dates
-        getTides(stationId, beginDate, endDate);    
-    });    
-
+        getTides(stationId, startDate, endDate);    
+    }); 
 }
 
-function loadDateFilters(stationId, stationName) {
+function loadDateSelection(stationId) {
     // show date selection screen
     $("#date-container").show();
 
-    // listen for date selection    
+    // create date range picker
+    $("#date-range").daterangepicker(
+        // date range picker options
+        {
+            opens: 'center',
+            //default dates: today to today+1month
+            startDate: moment().format("MM/DD/YYYY"),
+            endDate: moment().add(1,"months").format("MM/DD/YYYY"),
+            "alwaysShowCalendars": true,
+            ranges: {
+                '1 week': [moment(), moment().add(6, "days")],
+                '1 month': [moment(), moment().add(1, "months")],
+                '3 months': [moment(), moment().add(3, "months")],
+                '6 months': [moment(), moment().add(6, "months")],
+                '1 year': [moment(), moment().add(1, "years")],
+                'Current year': [moment().startOf("year"), moment().endOf("year")]
+             }
+        }
+    );
+
     handleDateSubmit(stationId);
+
 }
 
 function handleTideStationSelection(stationId, stationName) {
@@ -128,7 +154,7 @@ function handleTideStationSelection(stationId, stationName) {
     $("#location-form").hide();
 
     // load date filter selection page
-    loadDateFilters(stationId, stationName);
+    loadDateSelection(stationId);
 }
 
 function setLocation(lat, long) {
