@@ -232,6 +232,14 @@ input {
         margin: 20px auto;
     }
 
+    .results-heading {
+        font-size: 1.75rem;
+    }
+
+    .time-notice {
+        font-style: italic;
+    }
+
     .year-heading {
         margin-top: 20px;
         margin-bottom: 20px;
