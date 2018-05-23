@@ -284,6 +284,7 @@ input {
 @media (min-width: 600px){
     .results-grid {
         grid-template-columns: repeat(2, 1fr); 
+        row-gap: 25px;
     }
 }
 
