@@ -35,10 +35,9 @@
         <button id="geo-btn" class="geo-btn" type="button"><i class="fas fa-crosshairs"></i></button>
         
         <section id="date-container" role="region">
-            <h3>Pick a range of dates to search for tides:</h3>
+            <h3 id="date-range-lbl">Pick a range of dates to search for tides:</h3>
             <form action="" id="date-form" class="date-form">
-                <label for="date-range">Choose dates:</label>
-                <input id="date-range" class="date-range" type="text" name="date-range">
+                <input id="date-range" class="date-range" type="text" name="date-range" aria-labelledby="date-range-lbl">
                 <button id="date-submit" class="date-submit" type="submit">Get Tides!</button>
             </form>
         </section>
