@@ -8,7 +8,7 @@ function handleStartOverBtn(){
         // hide tide-results section
         $("#tide-results").hide();
         //clear results
-        $("#results-grid").html("");
+        $("#grid-container").html("");
         // show location form
         $("#location-form").show();
         // hide start over btn
@@ -23,23 +23,42 @@ function renderTides(data) {
     // show tide-results section
     $("#tide-results").show(); 
     
+    // get the first and last years of the results, and the difference
+    const firstYear = moment(data.predictions[0].t).year();
+    const lastYear = moment(data.predictions[data.predictions.length-1].t).year(); 
+    const yearDiff = lastYear - firstYear;
+
+    // create headers and containers for each year of tide results and place in grid-container
+    for (let i = 0; i <= yearDiff; i += 1) {
+        let yearGrid = `
+            <h3 class="year-heading">${firstYear+i}</h3>
+            <div id="${firstYear + i}" class="results-grid"></div>
+        `;
+        $("#grid-container").append(yearGrid);
+    }
+    
+
     // render JSON tide data in cards
     $.each(data.predictions, function(index, value){
+        // create a moment for each result
         value.date = moment(value.t);
+        // round tide data to two decimal places
         value.v = Number(value.v).toFixed(2);
 
+        // format dates 
         let day = value.date.format("ddd");
         let month = value.date.format("MMM");
-        let date = value.date.format("Do");
+        let dateOfMonth = value.date.format("Do");
         let time = value.date.format("h:mm");
         let ampm = value.date.format("a");
         
+        // add dates and tides as content (and classes for potential formatting)
         let cardContent = `
             <div class="result-card">
                 <div class="date-container">               
                     <span class="${day}">${day}, </span>
                     <span class="${month}">${month} </span>
-                    <span class="${date}">${date}</span>
+                    <span class="${dateOfMonth}">${dateOfMonth}</span>
                 </div>
                 <div class="time-container">
                         <span>${time}</span>
@@ -51,17 +70,21 @@ function renderTides(data) {
                 </div>
             </div>
         `;
-        $("#results-grid").append(cardContent);
+
+        // add result card to appropriate year results-grid
+        let year= value.date.year();
+        $(`#${year}`).append(cardContent);
         
     });
 
+    // hide tides > 0ft
     $(".tide-height").each(function(index, elem){              
         if (Number($(this).text()) > 0) {
             $(this).parent().parent().hide();
         }
     });
 
-    // hide loading section
+    // hide ajax loading section
     $("#ajax-status").hide();
 
     // listen for user clicks on Start Over button
@@ -77,11 +100,11 @@ function getTides(stationId, beginDate, endDate) {
         begin_date: beginDate,
         end_date: endDate,
         product: "predictions",
-        datum: "MLLW",
+        datum: "MLLW", //mean lower low water (standard low tide value)
         units: "english",
         time_zone: "lst_ldt",
         format: "json",
-        interval: "hilo"
+        interval: "hilo" // request daily high and low tides
     }
 
     const settings = {
@@ -89,10 +112,12 @@ function getTides(stationId, beginDate, endDate) {
         data: data,
         dataType: "json",
         beforeSend: function() {
+            // show ajax status container and create page loader img
             $("#ajax-status").show().html('<img src="loader.svg" alt="Page Loading">');
         },
         success: renderTides,
         error: function() {
+            // if ajax fails, replace page loader img with error message
             $("#ajax-status").html('<p>Your request was unsuccessful. Please try again.')
             
             handleStartOverBtn();
@@ -101,7 +126,6 @@ function getTides(stationId, beginDate, endDate) {
             
         }
     }
-
 
     $.ajax(settings);
 }

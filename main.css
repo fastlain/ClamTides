@@ -232,6 +232,15 @@ input {
         margin: 20px auto;
     }
 
+    .year-heading {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-style: italic;
+        font-size: 2rem;
+        background-color: #3D5D73
+    }
+
     .results-grid {
         display: grid;
         grid-template-columns: 1fr;
