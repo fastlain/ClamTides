@@ -20,7 +20,7 @@ function handleStartOverBtn(){
 
 function renderTides(data) {        
     // show tide-results section
-    $("#tide-results").show();
+    $("#tide-results").show(); 
     
     // render JSON tide data in cards
     $.each(data.predictions, function(index, value){
@@ -51,7 +51,6 @@ function renderTides(data) {
             </div>
         `;
         $("#results-grid").append(cardContent);
-        console.log("appending");
         
     });
 
@@ -84,7 +83,7 @@ function getTides(stationId, beginDate, endDate) {
     $.getJSON("https://tidesandcurrents.noaa.gov/api/datagetter", data, renderTides);
 }
 
-function handleDateSubmit(stationId) {
+function handleDateSubmit() {
     // handle date submit button
     $("#date-submit").click(function(evt){
         evt.preventDefault();
@@ -108,57 +107,58 @@ function handleDateSubmit(stationId) {
         let displayEnd = end.format("MMM Do YYYY");
 
         $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);
-        $("#results-subheading").text(`Showing tides less than 0 ft`);
-        console.log(`Start: ${startDate}, End: ${endDate}`);
+        $("#results-subheading").text(`Showing tides less than 0 ft`);        
         
-        getTides(stationId, startDate, endDate);    
+        getTides($("#results-heading").data("stationId"), startDate, endDate);    
     }); 
 }
 
-function loadDateSelection(stationId) {
+function loadDateSelection() {
     // show date selection screen
     $("#date-container").show();
 
-    // create date range picker
-    $("#date-range").daterangepicker(
-        // date range picker options
-        {
-            opens: 'center',
-            //default dates: today to today+1month
-            startDate: moment().format("MM/DD/YYYY"),
-            endDate: moment().add(1,"months").format("MM/DD/YYYY"),
-            "alwaysShowCalendars": true,
-            ranges: {
-                '1 week': [moment(), moment().add(6, "days")],
-                '1 month': [moment(), moment().add(1, "months")],
-                '3 months': [moment(), moment().add(3, "months")],
-                '6 months': [moment(), moment().add(6, "months")],
-                '1 year': [moment(), moment().add(1, "years")],
-                'Current year': [moment().startOf("year"), moment().endOf("year")]
-             }
-        }
-    );
+    // if input date picker is blank, create date picker and listen for submit
+    if (!$("#date-range").val()) {
+        
+        // create date range picker
+        $("#date-range").daterangepicker(
+            // date range picker options
+            {
+                opens: 'center',
+                //default dates: today to today+1month
+                startDate: moment().format("MM/DD/YYYY"),
+                endDate: moment().add(1,"months").format("MM/DD/YYYY"),
+                "alwaysShowCalendars": true,
+                ranges: {
+                    '1 week': [moment(), moment().add(6, "days")],
+                    '1 month': [moment(), moment().add(1, "months")],
+                    '3 months': [moment(), moment().add(3, "months")],
+                    '6 months': [moment(), moment().add(6, "months")],
+                    '1 year': [moment(), moment().add(1, "years")],
+                    'Current year': [moment().startOf("year"), moment().endOf("year")]
+                }
+            }
+        );
 
-    handleDateSubmit(stationId);
-
+        handleDateSubmit();
+    }
 }
 
 function handleTideStationSelection(stationId, stationName) {
-   //console.log(`Selected Station: ${stationName} (${stationId})`);
-
     // render selected tide station in results section
-    $("#results-heading").text(`${stationName}`);
+    $("#results-heading").text(stationName);
+    // store associated stationId as a data attribute
+    $("#results-heading").data("stationId", stationId);
 
     // hide map and location search bar
     $("#map").hide();
     $("#location-form").hide();
 
     // load date filter selection page
-    loadDateSelection(stationId);
+    loadDateSelection();
 }
 
 function setLocation(lat, long) {
-    //console.log(`Map repositioning at Lat: ${lat} Lon: ${long}`);
     map.setCenter({lat: lat, lng: long});
     map.setZoom(8);
 }
