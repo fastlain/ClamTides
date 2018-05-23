@@ -9,13 +9,13 @@ A tide-finding application for clam diggers. Users can choose tide stations thro
 When trying to find the best days to dig for clams, it can be surpisingly difficult to find the right tide chart for your location and to sift through the data for low tides. I wanted to make it easy to search for locations, see them on a map, select dates of interest, and to show only the best (lowest) tides.
 
 ## Screenshots
-Home page with map and location autocomplete
+#### Home page with map and location autocomplete:
 ![Map showing autocomplete search](screenshots/MapAutocomplete.PNG)
 
-Date range selection interface
+#### Date range selection interface:
 ![Date selection](screenshots/dateSelection.PNG)
 
-Tide results
+#### Tide results:
 ![Tide Results](screenshots/results.PNG)
 
 ## Built With
