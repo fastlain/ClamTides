@@ -26,6 +26,18 @@ input {
     font-family: 'Roboto', sans-serif;
 }
 
+p {
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 /***** Color Palette *****/
 /* #011E3D prussian blue*/
 /* #3D5D73 chambray blue*/
@@ -33,54 +45,46 @@ input {
 /* #97B8C2 nepal blue*/
 /* #F7EED7 island spice (creamy yellow)*/
 
-    header {
-        background-color: #011E3D;
-        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.4);
-    }
-    body {
-        background-color: #6098AA;
-    }
+header {
+    background-color: #011E3D;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
+body {
+    background-color: #6098AA;
+}
 
-    h1, 
-    h2,
-    h3,
-    h4,
-    label,
-    a,
-    p {
-        color: #F7EED7;
-    }
+h1, 
+h2,
+h3,
+h4,
+label,
+a,
+p {
+    color: #F7EED7;
+}
 
-    a {
-        text-decoration: none;
-    }
+button {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+    background-color: #97B8C2;
+    margin: 10px 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 10px;
+}
 
-    a:hover {
-        text-decoration: underline;
-    }
+button:hover {
+    background-color: #3D5D73;
+}
 
-    button {
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
-        background-color: #97B8C2;
-        margin: 10px 5px;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 5px 10px;
-    }
-
-    button:hover {
-        background-color: #3D5D73;
-    }
-
-    input {
-        border: none;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-        padding: 8px;
-        text-align: left;
-    }
+input {
+    border: none;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    padding: 8px;
+    text-align: left;
+}
 
 
 
@@ -89,215 +93,214 @@ input {
     PAGE LAYOUT
     ===============  */
 
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-    }
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
 
-    header,
-    main,
-    footer, 
-    form {
-        text-align: center;
-    }
+header,
+main,
+footer, 
+form {
+    text-align: center;
+}
 
-    main {
-        margin-bottom: 60px;
-    }
+main {
+    margin-bottom: 60px;
+}
 
-    header {
-        padding: 10px;
-    }
+header {
+    padding: 10px;
+}
+
+
+h1,
+h2 {
+    margin: 0;
+}
+
+h3,
+h4 {
+    margin: 5px 0;
+}
+
+p {
+    margin: 0;
+}
+
+label {
+    display: block;
+    margin-left: 0;
+}
+
+input {
+    margin: 5px 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right:0;
+    padding: 10px;
+    background-color: #011E3D;
+}
+
+/***** Hidden Elements on Load *****/
+#date-container,
+#tide-results,
+#restart-btn,
+#geo-btn {
+    display: none;
+}
 
   
-    h1,
-    h2 {
-        margin: 0;
-    }
-
-    h3,
-    h4 {
-        margin: 5px 0;
-    }
-
-    p {
-        margin: 0;
-        font-size: 14px;
-    }
-
-    label {
-        display: block;
-        margin-left: 0;
-    }
-
-    input {
-        margin: 5px 0;
-    }
-
-    footer {
-        position: fixed;
-        bottom: 0;
-        left:0;
-        right:0;
-        padding: 10px;
-        background-color: #011E3D;
-    }
-
-    /***** Hidden Elements on Load *****/
-    #date-container,
-    #tide-results,
-    #restart-btn,
-    #geo-btn {
-        display: none;
-    }
-
-    #map {
-        height: calc(100vh - 300px); /* full viewport heigh minus ~header/footer/form */
-        min-height: 300px;
-        width: 90%;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-   
 /*  ===============
     MODULES
     ===============  */
 
     /***** Location Search Form *****/
     
-    .location-form {
-        width: 90%;
-        max-width: 600px;
-        margin: 5px auto;
-        text-align: left;
-    }
-    
-    .search-group {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
+.location-form {
+    width: 90%;
+    max-width: 600px;
+    margin: 5px auto;
+    text-align: left;
+}
 
-    .location-input {
-        width: calc(100% - 100px);
+.search-group {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-    }
+.location-input {
+    width: calc(100% - 100px);
 
-    .location-submit {
-        max-width: 100px;
-    }
+}
+
+.location-submit {
+    max-width: 100px;
+}
 
    /***** Map *****/
-   
-   .info-label {
-       font-size: 1rem;
-       margin-top: 20px;
-       width: 120px;
-       margin-bottom: 5px;
-       color: black;
-   }
 
-   .geo-btn {
-       background-color: white;
-       cursor: pointer;
-       margin-right: 8px;
-   }
+#map {
+    height: calc(100vh - 300px); /* full viewport heigh minus ~header/footer/form */
+    min-height: 300px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-   .geo-btn:hover {
-        background-color: white;
-   }
+.info-label {
+    font-size: 1rem;
+    margin-top: 20px;
+    width: 120px;
+    margin-bottom: 5px;
+    color: black;
+}
 
-   .geo-btn img{
-        margin: auto;
-        margin-top: 4px;
-    }
-   
-    /***** Date Filter *****/
-    
-    .date-range {
-        text-align: center;
-    }
+.geo-btn {
+    background-color: white;
+    cursor: pointer;
+    margin-right: 8px;
+}
 
-    .date-submit {
-        display: block;
-        margin: 10px auto;
-    }
+.geo-btn:hover {
+    background-color: white;
+}
 
-    /***** Results *****/
+.geo-btn img{
+    margin: auto;
+    margin-top: 4px;
+}
 
-    .ajax-status {
-        display: none;
-        margin: 20px auto;
-    }
+/***** Date Filter *****/
 
-    .results-heading {
-        font-size: 1.75rem;
-    }
+.date-range {
+    text-align: center;
+}
 
-    .time-notice {
-        font-style: italic;
-    }
+.date-submit {
+    display: block;
+    margin: 10px auto;
+}
 
-    .year-heading {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding: 10px;
-        font-style: italic;
-        font-size: 2rem;
-        background-color: #3D5D73
-    }
+/***** Results *****/
 
-    .results-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
-        justify-items: center;
-        margin: 10px auto;
-        padding: 0 10px;
-        max-width: 1600px;
+.ajax-status {
+    display: none;
+    margin: 20px auto;
+}
 
-    }
+.results-heading {
+    font-size: 1.75rem;
+}
 
-    .result-card {
-        height: 30px;
-        width: 100%;
-        max-width: 350px;
-        min-width: 250px;
-        background-color: #011E3D;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-        border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+.time-notice {
+    font-style: italic;
+}
 
-    .result-card div {
-        color: #F7EED7;
-    }
+.year-heading {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-style: italic;
+    font-size: 2rem;
+    background-color: #3D5D73
+}
 
-    .date-container {
-        width: 40%;
-        text-align: left;
-    }
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    justify-items: center;
+    margin: 10px auto;
+    padding: 0 10px;
+    max-width: 1600px;
 
-    .time-container {
-        width:30%;
-        text-align: right;
-    }
-    
-    .tide-container {
-        width:30%;
-        padding-left: 10%;
-        text-align: left;
-    }
+}
 
-    .restart-btn {
-        margin-top: 20px;
-    }
+.result-card {
+    height: 30px;
+    width: 100%;
+    max-width: 350px;
+    min-width: 250px;
+    background-color: #011E3D;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.result-card div {
+    color: #F7EED7;
+}
+
+.date-container {
+    width: 40%;
+    text-align: left;
+}
+
+.time-container {
+    width:30%;
+    text-align: right;
+}
+
+.tide-container {
+    width:30%;
+    padding-left: 10%;
+    text-align: left;
+}
+
+.restart-btn {
+    margin-top: 20px;
+}
 
 /*  ===============
     MEDIA QUERIES
