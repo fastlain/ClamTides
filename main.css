@@ -17,8 +17,8 @@ h1 {
     font-family: 'Lobster Two', sans-serif;
 }
 
-h2 {
-    font-size: 1.2rem;
+h2,h3,h4 {
+    font-size: 1.25rem;
 }
 
 body,
@@ -55,19 +55,22 @@ body {
 
 h1, 
 h2,
-h3,
-h4,
 label,
 a,
 p {
     color: #F7EED7;
 }
 
+h3,
+h4 {
+    color: white;
+}
+
 button {
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
-    background-color: #97B8C2;
+    background-color: #3D5D73;
     margin: 10px 5px;
     color: white;
     font-size: 1rem;
@@ -76,7 +79,8 @@ button {
 }
 
 button:hover {
-    background-color: #3D5D73;
+    background-color: #97B8C2;
+
 }
 
 input {
@@ -175,9 +179,14 @@ footer {
     margin: 0 auto;
 }
 
+.location-lbl {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
 .location-input {
     width: calc(100% - 100px);
-
 }
 
 .location-submit {
@@ -226,6 +235,10 @@ footer {
 .date-submit {
     display: block;
     margin: 10px auto;
+}
+
+.cancelBtn {
+    background-color:red;
 }
 
 /***** Results *****/
