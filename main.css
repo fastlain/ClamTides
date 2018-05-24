@@ -266,6 +266,10 @@ footer {
     color: #F7EED7;
 }
 
+.month-heading {
+    margin-top: 15px;
+}
+
 .results-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -274,14 +278,11 @@ footer {
     margin: 10px auto;
     padding: 0 10px;
     max-width: 1600px;
-
 }
 
 .result-card {
     height: 30px;
-    width: 100%;
-    max-width: 350px;
-    min-width: 250px;
+    width: 300px;
     background-color: #3D5D73;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
@@ -349,19 +350,34 @@ footer {
     ===============  */
 
 @media (min-width: 600px){
-    .results-grid {
-        grid-template-columns: repeat(2, 1fr); 
+    
+    .month-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        justify-items: center;
+        margin: 10px auto;
+        padding: 0 10px;
+        max-width: 1600px;
+    }
+    
+    .result-card {
+        height: 45px;
+    }
+    .am,
+    .pm {
+        line-height: 45px;
     }
 }
 
 @media (min-width: 900px){
-    .results-grid {
-        grid-template-columns: repeat(3, 1fr); 
+    .month-grid {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
 @media (min-width: 1200px){
-    .results-grid {
-        grid-template-columns: repeat(4, 1fr); 
+    .month-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }

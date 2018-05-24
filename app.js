@@ -17,20 +17,31 @@ function handleStartOverBtn() {
 function renderTides(data) {        
     $("#tide-results").show(); 
     
-    // get the first and last years of the results, and the difference
-    const firstYear = moment(data.predictions[0].t).year();
-    const lastYear = moment(data.predictions[data.predictions.length-1].t).year(); 
-    const yearDiff = lastYear - firstYear;
+    // get the first and last years of the results
+    let dateIndex = moment(data.predictions[0].t);
+    const endTideDate = moment(data.predictions[data.predictions.length-1].t); 
 
-    // create headers and containers for each year of tide results and place in grid-container
-    for (let i = 0; i <= yearDiff; i += 1) {
-        const yearGrid = `
-            <h3 class="year-heading">${firstYear+i}</h3>
-            <div id="${firstYear + i}" class="results-grid"></div>
-        `;
-        $("#grid-container").append(yearGrid);
+    let yearIndex = dateIndex.year();
+
+    // create container for each year and month
+    let dateContainer = "";
+
+    while(dateIndex.isBefore(endTideDate)) {
+
+        if (dateIndex.year() >= yearIndex) {
+            dateContainer += `</div><h3 class="year-heading">${yearIndex}</h3><div id="${yearIndex}-container" class="month-grid">`;
+            yearIndex += 1;
+        }
+
+        dateContainer += `<div><h4 class="month-heading">${dateIndex.format("MMMM")}</h4><div id="${dateIndex.format("YYYYMMM")}" class="results-grid"></div></div>`;
+        
+        dateIndex.add(1, "months")
+        
     }
+
+    dateContainer += "</div";
     
+    $("#grid-container").append(dateContainer);
 
     // render JSON tide data in cards
     $.each(data.predictions, function(index, value){
@@ -52,7 +63,7 @@ function renderTides(data) {
             <div class="result-card ${day}">
                 <div class="date-container">               
                     <span>${day}, </span>
-                    <span class="${month}">${month} </span>
+                    <span>${month} </span>
                     <span class="${dateOfMonth}">${dateOfMonth}</span>
                 </div>
                 <div class="time-container">
@@ -67,8 +78,9 @@ function renderTides(data) {
         `;
 
         // add result card to appropriate year results-grid
-        const year= value.date.year();
-        $(`#${year}`).append(cardContent);
+        const year = value.date.year();
+        
+        $(`#${year}${month}`).append(cardContent);
         
     });
 
