@@ -197,7 +197,7 @@ footer {
 
 #map {
     height: calc(100vh - 300px); /* full viewport heigh minus ~header/footer/form */
-    min-height: 300px;
+    min-height: 275px;
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
@@ -343,12 +343,6 @@ footer {
 .Sun div {
     color: #011E3D;
 }
-
-/* #011E3D prussian blue*/
-/* #3D5D73 chambray blue*/
-/* #6098AA air force blue*/
-/* #97B8C2 nepal blue*/
-/* #F7EED7 island spice (creamy yellow)*/
 
 /*  ===============
     MEDIA QUERIES
