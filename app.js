@@ -14,27 +14,37 @@ function handleStartOverBtn() {
     });
 }
 
+// Hide month containers with no visible tides
+function hideEmpty() {
+    $(".results-grid").each(function(index, elem) {
+        if ($(this).find(":visible").length === 0) {
+            $(this).parent().hide();
+        }
+    });
+}
+
 function renderTides(data) {        
     $("#tide-results").show(); 
     
     // get the first and last years of the results
     let dateIndex = moment(data.predictions[0].t);
     const endTideDate = moment(data.predictions[data.predictions.length-1].t); 
-
     let yearIndex = dateIndex.year();
 
     // create container for each year and month
     let dateContainer = "";
-
     while(dateIndex.isBefore(endTideDate)) {
 
+        // create a new year container if it's a new year
         if (dateIndex.year() >= yearIndex) {
             dateContainer += `</div><h3 class="year-heading">${yearIndex}</h3><div id="${yearIndex}-container" class="month-grid">`;
             yearIndex += 1;
         }
 
-        dateContainer += `<div><h4 class="month-heading">${dateIndex.format("MMMM")}</h4><div id="${dateIndex.format("YYYYMMM")}" class="results-grid"></div></div>`;
+        // create a new month container
+        dateContainer += `<div class="month-container"><h4 class="month-heading">${dateIndex.format("MMMM")}</h4><div id="${dateIndex.format("YYYYMMM")}" class="results-grid"></div></div>`;
         
+        // increment the month moment
         dateIndex.add(1, "months")
         
     }
@@ -90,6 +100,8 @@ function renderTides(data) {
             $(this).parent().parent().hide();
         }
     });
+
+    hideEmpty();
 
     // hide ajax loading section
     $("#ajax-status").hide();
