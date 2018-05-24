@@ -1,10 +1,10 @@
 "use strict";
 
 // create Google Map API global variables
-var map, places, searchBox;
+let map, places, searchBox;
 
-function handleStartOverBtn(){
-    $("#restart-btn").click(function(evt){
+function handleStartOverBtn() {
+    $("#restart-btn").click(function(evt) {
         $("#tide-results").hide();
         //clear results
         $("#grid-container").html("");
@@ -24,7 +24,7 @@ function renderTides(data) {
 
     // create headers and containers for each year of tide results and place in grid-container
     for (let i = 0; i <= yearDiff; i += 1) {
-        let yearGrid = `
+        const yearGrid = `
             <h3 class="year-heading">${firstYear+i}</h3>
             <div id="${firstYear + i}" class="results-grid"></div>
         `;
@@ -41,14 +41,14 @@ function renderTides(data) {
         value.v = Number(value.v).toFixed(2);
 
         // format dates 
-        let day = value.date.format("ddd");
-        let month = value.date.format("MMM");
-        let dateOfMonth = value.date.format("Do");
-        let time = value.date.format("h:mm");
-        let ampm = value.date.format("a");
+        const day = value.date.format("ddd");
+        const month = value.date.format("MMM");
+        const dateOfMonth = value.date.format("Do");
+        const time = value.date.format("h:mm");
+        const ampm = value.date.format("a");
         
         // add dates and tides as content (and classes for potential formatting)
-        let cardContent = `
+        const cardContent = `
             <div class="result-card">
                 <div class="date-container">               
                     <span class="${day}">${day}, </span>
@@ -67,13 +67,13 @@ function renderTides(data) {
         `;
 
         // add result card to appropriate year results-grid
-        let year= value.date.year();
+        const year= value.date.year();
         $(`#${year}`).append(cardContent);
         
     });
 
     // hide tides > 0ft
-    $(".tide-height").each(function(index, elem){              
+    $(".tide-height").each(function(index, elem) {              
         if (Number($(this).text()) > 0) {
             $(this).parent().parent().hide();
         }
@@ -81,7 +81,6 @@ function renderTides(data) {
 
     // hide ajax loading section
     $("#ajax-status").hide();
-
 
     // show restart-btn
     $("#restart-btn").show();
@@ -99,7 +98,7 @@ function getTides(stationId, beginDate, endDate) {
         time_zone: "lst_ldt",
         format: "json",
         interval: "hilo" // request daily high and low tides
-    }
+    };
 
     const settings = {
         url: "https://tidesandcurrents.noaa.gov/api/datagetter",
@@ -107,12 +106,12 @@ function getTides(stationId, beginDate, endDate) {
         dataType: "json",
         beforeSend: function() {
             // show ajax status container and create page loader img
-            $("#ajax-status").show().html('<img src="loader.svg" alt="Page Loading">');
+            $("#ajax-status").show().html(`<img src="loader.svg" alt="Page Loading">`);
         },
         success: renderTides,
         error: function() {
             // if ajax fails, replace page loader img with error message
-            $("#ajax-status").html('<p>Your request was unsuccessful. Please try again.')
+            $("#ajax-status").html("<p>Your request was unsuccessful. Please try again.")
             // show restart-btn
             $("#restart-btn").show();       
         }
@@ -129,19 +128,19 @@ function handleDateSubmit() {
         $("#date-container").hide();
 
         // get date range from input field
-        let dateRange = $("#date-range").val().split(" - ");   
+        const dateRange = $("#date-range").val().split(" - ");   
 
         // convert input dates to moments
-        let start = moment(dateRange[0], "MM-DD-YYYY");
-        let end = moment(dateRange[1], "MM-DD-YYYY");
+        const start = moment(dateRange[0], "MM-DD-YYYY");
+        const end = moment(dateRange[1], "MM-DD-YYYY");
         
         //format dates for AJAX request
-        let startDate = start.format("YYYYMMDD");
-        let endDate = end.format("YYYYMMDD");
+        const startDate = start.format("YYYYMMDD");
+        const endDate = end.format("YYYYMMDD");
         
         //format dates for display
-        let displayBegin = start.format("MMM Do YYYY");
-        let displayEnd = end.format("MMM Do YYYY");
+        const displayBegin = start.format("MMM Do YYYY");
+        const displayEnd = end.format("MMM Do YYYY");
 
         $("#results-daterange").text(`${displayBegin} - ${displayEnd}`);     
         
@@ -159,18 +158,18 @@ function loadDateSelection() {
         $("#date-range").daterangepicker(
             // date range picker options
             {
-                opens: 'center',
+                opens: "center",
                 //default dates: today to today+1month
                 startDate: moment().format("MM/DD/YYYY"),
                 endDate: moment().add(1,"months").format("MM/DD/YYYY"),
                 "alwaysShowCalendars": true,
                 ranges: {
-                    '1 week': [moment(), moment().add(6, "days")],
-                    '1 month': [moment(), moment().add(1, "months")],
-                    '3 months': [moment(), moment().add(3, "months")],
-                    '6 months': [moment(), moment().add(6, "months")],
-                    '1 year': [moment(), moment().add(1, "years")],
-                    'Current year': [moment().startOf("year"), moment().endOf("year")]
+                    "1 week": [moment(), moment().add(6, "days")],
+                    "1 month": [moment(), moment().add(1, "months")],
+                    "3 months": [moment(), moment().add(3, "months")],
+                    "6 months": [moment(), moment().add(6, "months")],
+                    "1 year": [moment(), moment().add(1, "years")],
+                    "Current year": [moment().startOf("year"), moment().endOf("year")]
                 }
             }
         );
@@ -199,8 +198,8 @@ function handleLocationFormSubmit() {
         // focus on location input and trigger enter keystroke to simulate
         // change in the Places autocomplete box
         $("#location-input").focus();
-        var locationInput = document.getElementById('location-input');
-        google.maps.event.trigger(locationInput, 'keydown', { keyCode: 13 });
+        const locationInput = document.getElementById("location-input");
+        google.maps.event.trigger(locationInput, "keydown", { keyCode: 13 });
         
         if (searchBox.getPlaces() != undefined) {
             changePlace();
@@ -222,14 +221,14 @@ function changePlace() {
     }
 
     // Change the map bounds to encompass matching returned places
-    var bounds = new google.maps.LatLngBounds();
+    const bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
         // if user entry or selection doesn't have latlong coordinates, exit
         if (!place.geometry) {
             return;
         }
         if (place.geometry.viewport) {
-             bounds.union(place.geometry.viewport);
+            bounds.union(place.geometry.viewport);
         } else {
             bounds.extend(place.geometry.location);
         }
@@ -241,31 +240,31 @@ function changePlace() {
 // use the Google Maps Places library to generate an autocomplete search box
 function createAutoComplete() {
     // associate the search box with #location-input
-    let input = document.getElementById('location-input');
+    const input = document.getElementById("location-input");
     searchBox = new google.maps.places.SearchBox(input);
 
      // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
+    map.addListener("bounds_changed", function() {
         searchBox.setBounds(map.getBounds());
     });    
 
     // when user selects a generated place, reposition the map
-    searchBox.addListener('places_changed', changePlace);
+    searchBox.addListener("places_changed", changePlace);
 }
 
 // get geolocation, if available, and recenter map to that location
 function getGeoLoc() {
     navigator.geolocation.getCurrentPosition(function(position){
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
-        map.setCenter({lat: lat, lng: long});
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        map.setCenter({lat, lng});
         map.setZoom(8);
     });
 }
 
 function createMap() {
     // create new map centered on USA  
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: 39, lng: -98},
         zoom: 4,
         fullscreenControl: false,
@@ -274,11 +273,11 @@ function createMap() {
     });
 
     // add geolocation button to map
-    let controlDiv = document.getElementById('geo-btn');
+    const controlDiv = document.getElementById("geo-btn");
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
     
     // delay showing geolocation button until map loads
-    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+    google.maps.event.addListenerOnce(map, "tilesloaded", function(){
       $("#geo-btn").show();
     });
     
@@ -290,13 +289,13 @@ function createMap() {
     // load static file with tide station locations and display markers
     map.data.loadGeoJson("tidestations.json");
     // create pop-up to display info when a marker is clicked
-    let infoWindow = new google.maps.InfoWindow();    
+    const infoWindow = new google.maps.InfoWindow();    
 
     // listen for map clicks and get information marker click
-    map.data.addListener('click', function(event) {
-        let clickID = event.feature.getProperty('Station ID');         
-        let clickStation = event.feature.getProperty('Station Name'); 
-        let contentString = `
+    map.data.addListener("click", function(event) {
+        const clickID = event.feature.getProperty("Station ID");         
+        const clickStation = event.feature.getProperty("Station Name"); 
+        const contentString = `
             <p class="info-label">${clickStation}</p>
             <button id="select-station" type="button">Select</button>
             `;
@@ -318,7 +317,7 @@ function createMap() {
     });
 
     // list for clicks away from info window and close
-    map.addListener('click', function(event){
+    map.addListener("click", function(event){
         infoWindow.close(map)
     });
 
