@@ -49,9 +49,9 @@ function renderTides(data) {
         
         // add dates and tides as content (and classes for potential formatting)
         const cardContent = `
-            <div class="result-card">
+            <div class="result-card ${day}">
                 <div class="date-container">               
-                    <span class="${day}">${day}, </span>
+                    <span>${day}, </span>
                     <span class="${month}">${month} </span>
                     <span class="${dateOfMonth}">${dateOfMonth}</span>
                 </div>

@@ -238,7 +238,7 @@ footer {
 }
 
 .cancelBtn {
-    background-color:red;
+    background-color:tomato;
 }
 
 /***** Results *****/
@@ -262,7 +262,8 @@ footer {
     padding: 10px;
     font-style: italic;
     font-size: 2rem;
-    background-color: #3D5D73
+    background-color: #011E3D;
+    color: #F7EED7;
 }
 
 .results-grid {
@@ -281,7 +282,7 @@ footer {
     width: 100%;
     max-width: 350px;
     min-width: 250px;
-    background-color: #011E3D;
+    background-color: #3D5D73;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
     display: flex;
@@ -292,7 +293,7 @@ footer {
 }
 
 .result-card div {
-    color: #F7EED7;
+    color: white;
 }
 
 .date-container {
@@ -314,6 +315,40 @@ footer {
 .restart-btn {
     margin-top: 20px;
 }
+
+.am,
+.pm {
+    display:inline-block;
+    line-height: 30px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.am {
+    background: #97B8C2;
+    color: #011E3D;
+}
+
+.pm {
+    background: #011E3D;
+    color: #97B8C2;
+}
+
+.Sat,
+.Sun {
+    background-color: #F7EED7;
+}
+
+.Sat div,
+.Sun div {
+    color: #011E3D;
+}
+
+/* #011E3D prussian blue*/
+/* #3D5D73 chambray blue*/
+/* #6098AA air force blue*/
+/* #97B8C2 nepal blue*/
+/* #F7EED7 island spice (creamy yellow)*/
 
 /*  ===============
     MEDIA QUERIES
