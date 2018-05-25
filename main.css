@@ -201,7 +201,7 @@ footer {
 
 #map {
     height: calc(100vh - 300px); /* full viewport heigh minus ~header/footer/form */
-    min-height: 275px;
+    min-height: 250px;
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
@@ -262,7 +262,7 @@ footer {
 
 .height-input {
     display: inline-block;
-    width: 50px;
+    width: 60px;
     margin-left: 2px;
     margin-right: 2px;
 }
