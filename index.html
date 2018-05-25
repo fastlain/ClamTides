@@ -44,9 +44,14 @@
 
         <section id="tide-results" class="tide-results" role="region">
             <h3 id="results-heading" class="results-heading"></h3>
-            <h4 id="results-daterange"></h4>
-            <h4 id="results-subheading">Showing tides less than 0 ft</h4>
             <h4 class="time-notice">All times local to tide station</h4>
+            <h4 id="results-daterange"></h4>
+            <h4 id="results-subheading"></h4>
+            <form id="filter-form" action="">
+                <label class="filter-label" for="height-input">Showing tides less than <input id="height-input" class="height-input" type="number" name="height-input" placeholder="0.0" step="0.1"> ft</label>
+                
+                <button type="submit">Filter</button>
+            </form>
             <div id="grid-container" aria-live="polite"></div>
         </section>
 

@@ -14,13 +14,41 @@ function handleStartOverBtn() {
     });
 }
 
+// filter tides when filter form is submitted
+function handleFilterSubmit() {
+    $("#filter-form").submit(function(evt) {
+        evt.preventDefault();
+        filterHeight($("#height-input").val());
+    })
+}
+
 // Hide month containers with no visible tides
 function hideEmpty() {
     $(".results-grid").each(function(index, elem) {
+        $(this).parent().show();
         if ($(this).find(":visible").length === 0) {
             $(this).parent().hide();
         }
     });
+}
+
+// filter out tides that are greater than filter height
+function filterHeight(height) {   
+    let parsedHeight = parseFloat(height);
+    $("#height-display").text(parsedHeight);
+    
+    $(".tide-height").each(function(index, elem) {  
+        // console.log(`Parsed height: ${parsedHeight}`);
+        // console.log(`Parsed this: ${parseFloat($(this).text())}`);
+        // console.log(`Parsed this: ${parseFloat($(this).text()) > parsedHeight}`);
+                    
+        if (parseFloat($(this).text()) > parsedHeight) {
+            $(this).parent().parent().hide();
+        } else {
+            $(this).parent().parent().show();
+        }
+    });
+    hideEmpty();
 }
 
 function renderTides(data) {        
@@ -94,14 +122,7 @@ function renderTides(data) {
         
     });
 
-    // hide tides > 0ft
-    $(".tide-height").each(function(index, elem) {              
-        if (Number($(this).text()) > 0) {
-            $(this).parent().parent().hide();
-        }
-    });
-
-    hideEmpty();
+    filterHeight(0);
 
     // hide ajax loading section
     $("#ajax-status").hide();
@@ -354,6 +375,7 @@ function initialize() {
     createAutoComplete();
     handleLocationFormSubmit();
     handleStartOverBtn();
+    handleFilterSubmit();
 }
 
 // on document ready, run initialize function

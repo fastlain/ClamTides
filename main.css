@@ -260,6 +260,17 @@ footer {
     font-style: italic;
 }
 
+.height-input {
+    display: inline-block;
+    width: 50px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.filter-label {
+    display: inline;
+}
+
 .year-heading {
     margin-top: 20px;
     margin-bottom: 20px;
