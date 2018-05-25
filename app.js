@@ -35,13 +35,9 @@ function hideEmpty() {
 // filter out tides that are greater than filter height
 function filterHeight(height) {   
     let parsedHeight = parseFloat(height);
-    $("#height-display").text(parsedHeight);
+    $("#height-input").val(parsedHeight);
     
-    $(".tide-height").each(function(index, elem) {  
-        // console.log(`Parsed height: ${parsedHeight}`);
-        // console.log(`Parsed this: ${parseFloat($(this).text())}`);
-        // console.log(`Parsed this: ${parseFloat($(this).text()) > parsedHeight}`);
-                    
+    $(".tide-height").each(function(index, elem) {                     
         if (parseFloat($(this).text()) > parsedHeight) {
             $(this).parent().parent().hide();
         } else {
