@@ -200,7 +200,7 @@ footer {
    /***** Map *****/
 
 #map {
-    height: calc(100vh - 300px); /* full viewport heigh minus ~header/footer/form */
+    height: calc(100vh - 350px); /* full viewport heigh minus ~header/footer/form */
     min-height: 250px;
     width: 90%;
     max-width: 800px;
