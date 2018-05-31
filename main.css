@@ -296,7 +296,7 @@ footer {
 }
 
 .result-card {
-    height: 30px;
+    height: 45px;
     width: 300px;
     background-color: #3D5D73;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
@@ -335,7 +335,7 @@ footer {
 .am,
 .pm {
     display:inline-block;
-    line-height: 30px;
+    line-height: 45px;
     padding-left: 4px;
     padding-right: 4px;
 }
@@ -365,7 +365,7 @@ footer {
     MEDIA QUERIES
     ===============  */
 
-@media (min-width: 600px){
+@media (min-width: 700px){
     
     .month-grid {
         display: grid;
@@ -376,23 +376,15 @@ footer {
         padding: 0 10px;
         max-width: 1600px;
     }
-    
-    .result-card {
-        height: 45px;
-    }
-    .am,
-    .pm {
-        line-height: 45px;
-    }
 }
 
-@media (min-width: 900px){
+@media (min-width: 1050px){
     .month-grid {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1350px){
     .month-grid {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
