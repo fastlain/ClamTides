@@ -367,25 +367,36 @@ footer {
 
 @media (min-width: 700px){
     
-    .month-grid {
+    /* If screen wider than 700px AND grid has at least 2 children... */
+    .month-grid[data-visChildren="4"],
+    .month-grid[data-visChildren="3"],
+    .month-grid[data-visChildren="2"]
+     {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 10px;
         justify-items: center;
         margin: 10px auto;
         padding: 0 10px;
-        max-width: 1600px;
+        max-width: 900px;
     }
 }
 
 @media (min-width: 1050px){
-    .month-grid {
+
+    /* If screen wider than 1050px AND grid has at least 3 children... */
+    .month-grid[data-visChildren="4"],
+    .month-grid[data-visChildren="3"] {
         grid-template-columns: 1fr 1fr 1fr;
+        max-width: 1200px;
     }
 }
 
 @media (min-width: 1350px){
-    .month-grid {
+    
+    /* If screen wider than 1350px AND grid has at least 4 children... */
+    .month-grid[data-visChildren="4"] {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        max-width: 1600px;
     }
 }

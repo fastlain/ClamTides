@@ -19,6 +19,7 @@ function handleFilterSubmit() {
     $("#filter-form").submit(function(evt) {
         evt.preventDefault();
         filterHeight($("#height-input").val());
+        countGridChildren();
     })
 }
 
@@ -28,6 +29,26 @@ function hideEmpty() {
         $(this).parent().show();
         if ($(this).find(":visible").length === 0) {
             $(this).parent().hide();
+        }
+    });
+}
+
+// Check number of visible children in each month-grid and assign to 
+// data attribute to determine grid layout in CSS
+function countGridChildren() {
+    $(".month-grid").each(function(index, element) {
+        // count number of visible children 
+        const visChildren = $(element).children(":visible").length;
+
+        // assign data attribute based on visChildren
+        if (visChildren >= 4) {
+            $(element).attr("data-visChildren", "4")
+        } else if (visChildren === 3) {
+            $(element).attr("data-visChildren", "3")
+        } else if (visChildren === 2) {
+            $(element).attr("data-visChildren", "2")
+        } else {
+            $(element).attr("data-visChildren", "0")
         }
     });
 }
@@ -119,6 +140,7 @@ function renderTides(data) {
     });
 
     filterHeight(0);
+    countGridChildren();
 
     // hide ajax loading section
     $("#ajax-status").hide();
