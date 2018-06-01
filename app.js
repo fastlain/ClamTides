@@ -169,7 +169,7 @@ function getTides(stationId, beginDate, endDate) {
         dataType: "json",
         beforeSend: function() {
             // show ajax status container and create page loader img
-            $("#ajax-status").show().html(`<img src="loader.svg" alt="Page Loading">`);
+            $("#ajax-status").show().html(`<img src="loader.png" alt="Page Loading">`);
         },
         success: renderTides,
         error: function() {

@@ -30,6 +30,10 @@ p {
     font-size: 14px;
 }
 
+.small-txt {
+    font-size: 10px;
+}
+
 a {
     text-decoration: none;
 }
@@ -245,12 +249,27 @@ footer {
     background-color:tomato;
 }
 
-/***** Results *****/
+/***** Loader Icon *****/
 
+/* Credit Tobias Ahlin - SpinKit: https://github.com/tobiasahlin/SpinKit */
 .ajax-status {
     display: none;
-    margin: 20px auto;
+    margin: 100px auto;
+    border-radius: 100%;  
+    animation: sk-scaleout 1.0s infinite ease-in-out;
 }
+  
+@keyframes sk-scaleout {
+    0% { 
+      transform: scale(0);
+    } 100% {
+      transform: scale(1.0);
+      opacity: 0;
+    }
+}
+
+
+/***** Results *****/
 
 .results-heading {
     font-size: 1.75rem;
