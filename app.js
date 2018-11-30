@@ -241,6 +241,8 @@ function loadDateSelection() {
 }
 
 function handleTideStationSelection(stationId, stationName) {
+    console.log('Click Detected');
+
     // render selected tide station in results section
     $("#results-heading").text(stationName);
     // store associated stationId as a data attribute
@@ -373,10 +375,12 @@ function createMap() {
         infoWindow.setOptions({ pixelOffset: new google.maps.Size(-1, -35) });
         // open the info window on the map
         infoWindow.open(map);
-        // handle clicks on the info window select button
-        $("#select-station").click(function (evt) {
-            handleTideStationSelection(clickID, clickStation);
-        });
+        // when DOM is ready, add click listener to select-station button
+        google.maps.event.addDomListener(infoWindow, 'domready', () => {
+            $("#select-station").click(function (evt) {
+                handleTideStationSelection(clickID, clickStation);
+            });
+        })
     });
 
     // list for clicks away from info window and close
