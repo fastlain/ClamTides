@@ -240,15 +240,23 @@ footer {
     background-color: white;
     cursor: pointer;
     margin-right: 8px;
+    width: 40px;
+    height: 40px;
+    fill: #666666;
 }
 
 .geo-btn:hover {
     background-color: white;
+    fill: black;
 }
 
-.geo-btn img{
-    margin: auto;
-    margin-top: 4px;
+.geo-svg {
+    position: absolute;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
 }
 
 /***** Date Filter *****/

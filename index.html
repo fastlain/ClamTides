@@ -27,14 +27,19 @@
         <form id="location-form" class="location-form" action="">
             <label class="location-lbl" for="location-input">Enter a location:</label>
             <div class="search-group">
-                <input id="location-input" class="location-input" type="text" placeholder="e.g. Astoria, OR">  
+                <input id="location-input" class="location-input" type="text" placeholder="e.g. Astoria, OR">
                 <button id="location-submit" class="location-submit" type="submit">Search</button>
             </div>
         </form>
-        
+
         <div id="map"></div>
-        <button id="geo-btn" class="geo-btn" type="button"><img src="crosshairs.svg" alt="geolocation button" width="15px"></button>
-        
+        <button id="geo-btn" class="geo-btn" type="button">
+            <!-- <img src="crosshairs.svg" alt="geolocation button" width="15px"> -->
+            <svg class="geo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M500 224h-30.364C455.724 130.325 381.675 56.276 288 42.364V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v30.364C130.325 56.276 56.276 130.325 42.364 224H12c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h30.364C56.276 381.675 130.325 455.724 224 469.636V500c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12v-30.364C381.675 455.724 455.724 381.675 469.636 288H500c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12zM288 404.634V364c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40.634C165.826 392.232 119.783 346.243 107.366 288H148c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12h-40.634C119.768 165.826 165.757 119.783 224 107.366V148c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12v-40.634C346.174 119.768 392.217 165.757 404.634 224H364c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40.634C392.232 346.174 346.243 392.217 288 404.634zM288 256c0 17.673-14.327 32-32 32s-32-14.327-32-32c0-17.673 14.327-32 32-32s32 14.327 32 32z" />
+            </svg>
+        </button>
+
         <section id="date-container" role="region">
             <h3 id="date-range-lbl">Pick a range of dates to search for tides:</h3>
             <form action="" id="date-form" class="date-form">
@@ -50,8 +55,9 @@
             <h4 id="results-daterange"></h4>
             <h4 class="time-notice">All times local to tide station</h4>
             <form id="filter-form" action="">
-                <label class="filter-label" for="height-input">Showing tides less than <input id="height-input" class="height-input" type="number" name="height-input" placeholder="0.0" step="0.1"> ft</label>
-                
+                <label class="filter-label" for="height-input">Showing tides less than <input id="height-input" class="height-input"
+                        type="number" name="height-input" placeholder="0.0" step="0.1"> ft</label>
+
                 <button type="submit">Filter</button>
             </form>
             <div id="grid-container" aria-live="polite"></div>
@@ -62,13 +68,16 @@
     </main>
     <footer role="contentinfo">
         <p>Created by: Michael Allain</p>
-        <p class="small-txt">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+        <p class="small-txt">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"
+                title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
+                title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </footer>
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js" integrity="sha256-L3S3EDEk31HcLA5C6T2ovHvOcD80+fgqaCDt2BAi92o="
+        crossorigin="anonymous"></script>
     <!-- Date Range Picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="app.js"></script>
