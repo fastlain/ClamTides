@@ -164,7 +164,7 @@ function getTides(stationId, beginDate, endDate) {
     };
 
     const settings = {
-        url: "https://tidesandcurrents.noaa.gov/api/datagetter",
+        url: "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
         data: data,
         dataType: "json",
         beforeSend: function () {
