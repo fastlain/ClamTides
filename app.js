@@ -241,8 +241,6 @@ function loadDateSelection() {
 }
 
 function handleTideStationSelection(stationId, stationName) {
-    console.log('Click Detected');
-
     // render selected tide station in results section
     $("#results-heading").text(stationName);
     // store associated stationId as a data attribute
